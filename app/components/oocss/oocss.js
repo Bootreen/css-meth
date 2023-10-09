@@ -126,6 +126,14 @@ const Oocss = ( {handler} ) => {
 .billetCons {
   background: #8f0404;
   color: #ddd;
+}
+
+@media (max-width: 1280px) {
+  .sectionContainer { width: 95%; }
+
+  body { font-size: 1.1rem; }
+
+  code { font-size: 1rem; }
 }`}
         </code>
       </div>

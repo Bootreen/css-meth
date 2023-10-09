@@ -66,6 +66,80 @@
   background: #ffe3e3;
 }
 
+.chili-db {
+  display: flex;
+  flex-direction: column;
+}
+
+.chili-db__title {
+  text-align: center;
+}
+
+.chili-db__menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.chili-db__menu-item {
+  padding: 0.7rem;
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
+  border-top-right-radius: 1rem;
+  &:hover {
+    background-color: #bbb;
+  }
+}
+
+.chili-db__browser {
+  display: flex;
+  flex-direction: row;
+}
+
+.chili-db__list-container {
+  flex-basis: 30%;
+}
+
+.chili-db__preview-column {
+  flex-basis: 70%;
+  align-self: flex-start;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-areas:
+    "header header"
+    "image spec_species"
+    "image spec_plant_size"
+    "image spec_fruit_size"
+    "image spec_spiciness"
+    "image spec_shape"
+    "image spec_color"
+    "description description";
+}
+
+.chili-db__preview-title {
+  grid-area: header;
+  text-align: center;
+}
+
+.chili-db__preview-img {
+  grid-area: image;
+  width: 98%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+.chili-db__preview-specs {
+  list-style-type: circle;
+  margin: 0.5rem 0 0 1.6rem;
+}
+
+.chili-db__preview-specs-item--strong {
+  font-weight: 600;
+}
+
+.chili-db__preview-description {
+  grid-area: description;
+}
+
 @media (max-width: 1280px) {
   .section-container {
     width: 95%;

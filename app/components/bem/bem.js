@@ -1,4 +1,6 @@
 import './bem.css';
+import Image from 'next/image';
+import { chilies, imagePrefix } from '../chiliesdb/chiliesdb';
 
 const Bem = ( {handler} ) => {
   return (
@@ -31,8 +33,7 @@ const Bem = ( {handler} ) => {
         <p className="section-container__paragraph section-container__paragraph--cons">Совершенно не гибкая система, продуцирующая длинные нечитаемые имена классов и неоправданно раздутые CSS- и HTML-файлы.</p>
         <p className="section-container__paragraph section-container__paragraph--cons">Названия классов-модификаторов наследуют имена родительских классов блока или элемента, что мешает использовать принципы каскадности и наследуемости в CSS. Например:</p>
         <code>{`.article__heading--red { color: red; }`}</code>
-        <code>
-          {`<h1 class="article__heading article__heading--red">Title</h1>`}</code>
+        <code>{`<h1 class="article__heading article__heading--red">Title</h1>`}</code>
         <p className="section-container__paragraph section-container__paragraph--cons">Этот класс можно применить только к заголовку первого уровня внутри блока article. Если нам понадобится красный акцент заголовка в любом другом блоке, согласно BEM для него нужно будет создавать отдельный класс. Необходимо 10 однотипных стилизаций для разных элементов? Создавай 10 отдельных классов. В большинстве других методологий для подобных модификаций создается один глобальный класс, который можно применять ко всем подходящим элементам:</p>
         <code>{`.text-red { color: red; }`}</code>
         <code>
@@ -40,8 +41,63 @@ const Bem = ( {handler} ) => {
 <h2 class="article_subheading text-red">Another title</h2>
 <p class="paragraph_main text-red">Lorem ipsum dolor sit amet</p>`}
         </code>
-          <p className="section-container__paragraph section-container__paragraph--cons">В отличие от других методологий, структура HTML-блоков и элементов (размеры, выравнивание, поля и отступы) не сепарируется от оформления (цвета, толщина линий, тени и прочие стилистические свистелки и перделки). Все свалено в одну кучу в одном классе.</p>
-          <h3 className="section-container__header">Пример стилизации текущего документа по BEM:</h3>
+        <p className="section-container__paragraph section-container__paragraph--cons">В отличие от других методологий, структура HTML-блоков и элементов (размеры, выравнивание, поля и отступы) не сепарируется от оформления (цвета, толщина линий, тени и прочие стилистические свистелки и перделки). Все свалено в одну кучу в одном классе.</p>
+
+        <div className="chili-db">
+          <div className="chili-db__header">
+            <h3 className="chili-db__title">Chili database</h3>
+          </div>
+          <div className="chili-db__menu">
+            <h4 className="chili-db__menu-item">All</h4>
+            <h4 className="chili-db__menu-item">Annuum</h4>
+            <h4 className="chili-db__menu-item">Frutescens</h4>
+            <h4 className="chili-db__menu-item">Baccatum</h4>
+            <h4 className="chili-db__menu-item">Chinense</h4>
+            <h4 className="chili-db__menu-item">Pubescens</h4>
+          </div>
+          <div className="chili-db__browser">
+            <div className="chili-db__list-container">
+              <div className="chili-db__list-search-field"></div>
+              <div className="chili-db__list-column">
+                {chilies.map((e, i) => <div key={i} className="chili-db__list-item">{e.name}</div>)}
+              </div>
+            </div>
+            <div className="chili-db__preview-column">
+              <h3 className="chili-db__preview-title">{chilies[0].name}</h3>
+              <div className="chili-db__preview-img">
+                <Image
+                  fill={true}
+                  src={imagePrefix + chilies[0].image}
+                  alt={chilies[0].name}
+                />
+              </div>
+              <ul className="chili-db__preview-specs">
+                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--species">
+                  <span className="chili-db__preview-specs-item--strong">C. {chilies[0].species}</span>
+                </li>
+                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--plant-size">
+                  Plant: <span className="chili-db__preview-specs-item--strong">{chilies[0].plantSize}</span>
+                </li>
+                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--fruit-size">
+                  Fruit: <span className="chili-db__preview-specs-item--strong">{chilies[0].fruitSize}</span>
+                </li>
+                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--spiciness">
+                  Spiciness: <span className="chili-db__preview-specs-item--strong">{chilies[0].heatLevel}</span>
+                </li>
+                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--shape">
+                  Shape: <span className="chili-db__preview-specs-item--strong">{chilies[0].fruitShape}</span>
+                </li>
+                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--color">
+                  Color: <span className="chili-db__preview-specs-item--strong">{chilies[0].fruitColor}</span>
+                </li>
+              </ul>
+              <p className="chili-db__preview-description">{chilies[0].description}</p>
+            </div>
+          </div>
+          <div className="chili-db__footer"></div>
+        </div>
+
+        <h3 className="section-container__header">Пример стилизации текущего документа по BEM:</h3>
         <code>
           {`.document-title {
   text-align: center;

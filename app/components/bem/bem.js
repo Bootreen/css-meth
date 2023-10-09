@@ -1,8 +1,27 @@
 import './bem.css';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 import { chilies, imagePrefix } from '../chiliesdb/chiliesdb';
 
 const Bem = ( {handler} ) => {
+  const filters = ['', 'annuum', 'frutescens', 'baccatum', 'chinense', 'pubescens'];
+  const [tab, setTab] = useState(0);
+  const menuHandler = event => {
+    // extract number from the supplement class "chili-db__menu-item--{number}"
+    // and assign it to the tab variable
+    setTab(Number(event.currentTarget.className.replace(/\D+/g, '')) - 1);
+  };
+  useEffect(() => {
+    if (document.getElementsByClassName("chili-db__menu-item--active")[0]) {
+      document.getElementsByClassName("chili-db__menu-item--active")[0]
+        // remove active stance from the current active menu item
+        .className = document.getElementsByClassName("chili-db__menu-item--active")[0]
+          .className.replace(" chili-db__menu-item--active", "");
+    };
+    // add active stance to the clicked menu item
+    document.getElementsByClassName(`chili-db__menu-item--${tab+1}`)[0]
+      .className += " chili-db__menu-item--active";
+  }, [tab])
   return (
     <main>
       <h1 className="document-title">CSS Methodologies</h1>
@@ -45,27 +64,32 @@ const Bem = ( {handler} ) => {
 
         <div className="chili-db">
           <div className="chili-db__header">
-            <h3 className="chili-db__title">Chili database</h3>
+            <h2 className="chili-db__title">Chili database</h2>
           </div>
           <div className="chili-db__menu">
-            <h4 className="chili-db__menu-item">All</h4>
-            <h4 className="chili-db__menu-item">Annuum</h4>
-            <h4 className="chili-db__menu-item">Frutescens</h4>
-            <h4 className="chili-db__menu-item">Baccatum</h4>
-            <h4 className="chili-db__menu-item">Chinense</h4>
-            <h4 className="chili-db__menu-item">Pubescens</h4>
+            <h4 className="chili-db__menu-item chili-db__menu-item--1" onClick={menuHandler}>All</h4>
+            <h4 className="chili-db__menu-item chili-db__menu-item--2" onClick={menuHandler}>Annuum</h4>
+            <h4 className="chili-db__menu-item chili-db__menu-item--3" onClick={menuHandler}>Frutescens</h4>
+            <h4 className="chili-db__menu-item chili-db__menu-item--4" onClick={menuHandler}>Baccatum</h4>
+            <h4 className="chili-db__menu-item chili-db__menu-item--5" onClick={menuHandler}>Chinense</h4>
+            <h4 className="chili-db__menu-item chili-db__menu-item--6" onClick={menuHandler}>Pubescens</h4>
+            <div className="chili-db__menu-item--placeholder"></div>
           </div>
           <div className="chili-db__browser">
             <div className="chili-db__list-container">
               <div className="chili-db__list-search-field"></div>
               <div className="chili-db__list-column">
-                {chilies.map((e, i) => <div key={i} className="chili-db__list-item">{e.name}</div>)}
+                {chilies
+                  .filter(e => filters[tab] === '' ? e: e.species === filters[tab])
+                  .map((e, i) => <div key={i} className="chili-db__list-item">{e.name}</div>)
+                }
               </div>
             </div>
             <div className="chili-db__preview-column">
               <h3 className="chili-db__preview-title">{chilies[0].name}</h3>
-              <div className="chili-db__preview-img">
+              <div className="chili-db__preview-img-container">
                 <Image
+                  className="chili-db__preview-img"
                   fill={true}
                   src={imagePrefix + chilies[0].image}
                   alt={chilies[0].name}

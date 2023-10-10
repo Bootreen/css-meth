@@ -152,6 +152,17 @@
   overflow-y: auto;
 }
 
+.chili-db__list-item {
+  color: #222;
+  padding: 0.125rem;
+}
+
+.chili-db__list-item--active {
+  color: #f7e38f;
+  background-color: #222;
+  border: 0.125rem dotted #f7e38f;
+}
+
 .chili-db__preview-column {
   flex-basis: 70%;
   align-self: center;

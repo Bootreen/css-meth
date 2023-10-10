@@ -4,24 +4,27 @@ import { useState, useEffect } from 'react';
 import { chilies, imagePrefix } from '../chiliesdb/chiliesdb';
 
 const Bem = ( {handler} ) => {
-  const filters = ['', 'annuum', 'frutescens', 'baccatum', 'chinense', 'pubescens'];
+  const tabs = ['all', 'annuum', 'frutescens', 'baccatum', 'chinense', 'pubescens'];
   const [tab, setTab] = useState(0);
+  const filterList = () => chilies.filter(e => tabs[tab] === 'all' ? true : e.species === tabs[tab]);
+  const [list, setList] = useState(filterList());
+  const [listItem, setListItem] = useState(0);
+
+  // extract number from the supplement class "...menu-item--${number}" to the tab variable
   const menuHandler = event => {
-    // extract number from the supplement class "chili-db__menu-item--{number}"
-    // and assign it to the tab variable
     setTab(Number(event.currentTarget.className.replace(/\D+/g, '')) - 1);
+    setListItem(0);
   };
-  useEffect(() => {
-    if (document.getElementsByClassName("chili-db__menu-item--active")[0]) {
-      document.getElementsByClassName("chili-db__menu-item--active")[0]
-        // remove active stance from the current active menu item
-        .className = document.getElementsByClassName("chili-db__menu-item--active")[0]
-          .className.replace(" chili-db__menu-item--active", "");
-    };
-    // add active stance to the clicked menu item
-    document.getElementsByClassName(`chili-db__menu-item--${tab+1}`)[0]
-      .className += " chili-db__menu-item--active";
-  }, [tab])
+
+  const listHandler = event => {
+    setListItem(Number(event.currentTarget.id));
+  };
+
+  // render list on tab change
+  useEffect(() =>
+    setList(filterList()) // eslint-disable-next-line react-hooks/exhaustive-deps
+  , [tab]);
+
   return (
     <main>
       <h1 className="document-title">CSS Methodologies</h1>
@@ -67,55 +70,60 @@ const Bem = ( {handler} ) => {
             <h2 className="chili-db__title">Chili database</h2>
           </div>
           <div className="chili-db__menu">
-            <h4 className="chili-db__menu-item chili-db__menu-item--1" onClick={menuHandler}>All</h4>
-            <h4 className="chili-db__menu-item chili-db__menu-item--2" onClick={menuHandler}>Annuum</h4>
-            <h4 className="chili-db__menu-item chili-db__menu-item--3" onClick={menuHandler}>Frutescens</h4>
-            <h4 className="chili-db__menu-item chili-db__menu-item--4" onClick={menuHandler}>Baccatum</h4>
-            <h4 className="chili-db__menu-item chili-db__menu-item--5" onClick={menuHandler}>Chinense</h4>
-            <h4 className="chili-db__menu-item chili-db__menu-item--6" onClick={menuHandler}>Pubescens</h4>
+            {tabs.map((e, i) =>
+              <h4
+                key={i}
+                className={`chili-db__menu-item chili-db__menu-item--${i + 1}
+                ${ tab === i ? " chili-db__menu-item--active" : "" }`}
+                onClick={menuHandler}
+              >{e[0].toLocaleUpperCase() + e.slice(1)}</h4>)}
             <div className="chili-db__menu-item--placeholder"></div>
           </div>
           <div className="chili-db__browser">
             <div className="chili-db__list-container">
               <div className="chili-db__list-search-field"></div>
               <div className="chili-db__list-column">
-                {chilies
-                  .filter(e => filters[tab] === '' ? e: e.species === filters[tab])
-                  .map((e, i) => <div key={i} className="chili-db__list-item">{e.name}</div>)
-                }
+                {list.map((e, i) =>
+                  <div
+                    id={i}
+                    key={i}
+                    className={`chili-db__list-item
+                    ${ listItem === i ? "chili-db__list-item--active" : "" }`}
+                    onClick={listHandler}
+                >{e.name}</div>)}
               </div>
             </div>
             <div className="chili-db__preview-column">
-              <h3 className="chili-db__preview-title">{chilies[0].name}</h3>
+              <h3 className="chili-db__preview-title">{list[listItem].name}</h3>
               <div className="chili-db__preview-img-container">
                 <Image
                   className="chili-db__preview-img"
                   fill={true}
-                  src={imagePrefix + chilies[0].image}
-                  alt={chilies[0].name}
+                  src={imagePrefix + list[listItem].image}
+                  alt={list[listItem].name}
                 />
               </div>
               <ul className="chili-db__preview-specs">
                 <li className="chili-db__preview-specs-item chili-db__preview-specs-item--species">
-                  <span className="chili-db__preview-specs-item--strong">C. {chilies[0].species}</span>
+                  <span className="chili-db__preview-specs-item--strong">C. {list[listItem].species}</span>
                 </li>
                 <li className="chili-db__preview-specs-item chili-db__preview-specs-item--plant-size">
-                  Plant: <span className="chili-db__preview-specs-item--strong">{chilies[0].plantSize}</span>
+                  Plant: <span className="chili-db__preview-specs-item--strong">{list[listItem].plantSize}</span>
                 </li>
                 <li className="chili-db__preview-specs-item chili-db__preview-specs-item--fruit-size">
-                  Fruit: <span className="chili-db__preview-specs-item--strong">{chilies[0].fruitSize}</span>
+                  Fruit: <span className="chili-db__preview-specs-item--strong">{list[listItem].fruitSize}</span>
                 </li>
                 <li className="chili-db__preview-specs-item chili-db__preview-specs-item--spiciness">
-                  Spiciness: <span className="chili-db__preview-specs-item--strong">{chilies[0].heatLevel}</span>
+                  Spiciness: <span className="chili-db__preview-specs-item--strong">{list[listItem].heatLevel}</span>
                 </li>
                 <li className="chili-db__preview-specs-item chili-db__preview-specs-item--shape">
-                  Shape: <span className="chili-db__preview-specs-item--strong">{chilies[0].fruitShape}</span>
+                  Shape: <span className="chili-db__preview-specs-item--strong">{list[listItem].fruitShape}</span>
                 </li>
                 <li className="chili-db__preview-specs-item chili-db__preview-specs-item--color">
-                  Color: <span className="chili-db__preview-specs-item--strong">{chilies[0].fruitColor}</span>
+                  Color: <span className="chili-db__preview-specs-item--strong">{list[listItem].fruitColor}</span>
                 </li>
               </ul>
-              <p className="chili-db__preview-description">{chilies[0].description}</p>
+              <p className="chili-db__preview-description">{list[listItem].description}</p>
             </div>
           </div>
           <div className="chili-db__footer"></div>

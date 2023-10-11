@@ -1,5 +1,6 @@
 import './bem.css';
 import Image from 'next/image';
+import { firstSection, lastSection } from '../store/store';
 import { useState, useEffect } from 'react';
 import { chilies, imagePrefix } from '../chiliesdb/chiliesdb';
 
@@ -31,11 +32,19 @@ const Bem = ( {handler} ) => {
       <div className="section-container">
         <div className="carousel">
           <div className="carousel__button-container">
-            <button id="prev" className="carousel__button" onClick={handler}>◄ previous</button>
+            <button
+              id="prev"
+              className={`carousel__button${firstSection() ? " carousel__button--disabled" : ""}`}
+              onClick={handler}
+            >◄ previous</button>
           </div>
           <h2 className="section-container__header section-container__header--main">BEM (Block - Element - Modifier)</h2>
           <div className="carousel__button-container">
-            <button id="next" className="carousel__button" onClick={handler}>next ►</button>
+            <button
+              id="next"
+              className={`carousel__button${lastSection() ? " carousel__button--disabled" : ""}`}
+              onClick={handler}
+            >next ►</button>
           </div>
         </div>
         <h3 className="section-container__header">In a nutshell</h3>

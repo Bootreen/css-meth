@@ -81,7 +81,7 @@ export const chilies = [
     fruitShape: 'round',
     fruitColor: 'red',
     description: 'Very early cherry paprika from Hungary. Pods are thick walled and have low-medium heat. Good suited for stuffing or in general cooking.',
-    image: 'farmers_jalapeno.jpg'
+    image: 'feher_cseresznye.jpg'
   },
 
   {
@@ -165,7 +165,7 @@ export const chilies = [
     fruitShape: 'heart',
     fruitColor: 'red',
     description: 'Very hot Capsicum annuum variety, which is cultivated on the Isle of La Palma.',
-    image: 'peter_pepper_yellow.jpg'
+    image: 'pimienta-puto-madre.jpg'
   },
 
   {
@@ -512,7 +512,7 @@ export const chilies = [
     fruitSize: 'medium',
     fruitShape: 'apple',
     fruitColor: 'yellow',
-    description: 'Canario is a mild Capsicum pubescens variety. Thick walled pods are dark yellow, when fully ripe and have the size of a small apple. Thia South American strain trives well under cool growing conditions and can be grown as a perennial.',
+    description: 'Canario is a mild Capsicum pubescens variety. Thick walled pods are dark yellow, when fully ripe and have the size of a small apple. This South American strain trives well under cool growing conditions and can be grown as a perennial.',
     image: 'canario.jpg'
   },
 

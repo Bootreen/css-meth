@@ -1,4 +1,5 @@
 import './oocss.css';
+import { firstSection, lastSection } from '../store/store';
 
 const Oocss = ( {handler} ) => {
   return (
@@ -7,11 +8,19 @@ const Oocss = ( {handler} ) => {
       <div className="sectionContainer bgGreyLight">
         <div className="carousel bgGreyDark">
           <div className="buttonContainer">
-            <button id="prev" className="buttonBorderless bgGreyDark" onClick={handler}>◄ previous</button>
+            <button
+              id="prev"
+              className={`buttonBorderless bgGreyDark${firstSection() ? " disabled" : ""}`}
+              onClick={handler}
+            >◄ previous</button>
           </div>
           <h2 className="sectionTitle clYellowPale">OOCSS (Object Oriented CSS)</h2>
           <div className="buttonContainer">
-            <button id="next" className="buttonBorderless bgGreyDark" onClick={handler}>next ►</button>
+            <button
+              id="next"
+              className={`buttonBorderless bgGreyDark${lastSection() ? " disabled" : ""}`}
+              onClick={handler}
+            >next ►</button>
           </div>
         </div>
         <h3 className="subheader">In a nutshell</h3>

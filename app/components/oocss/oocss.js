@@ -1,7 +1,9 @@
 import './oocss.css';
-import { firstSection, lastSection } from '../store/store';
+import { useStoreActions } from '../store/store';
 
-const Oocss = ( {handler} ) => {
+const Oocss = () => {
+  const { firstSection, lastSection, changeSection } = useStoreActions();
+  const onSectionButtonClickHandler = event => changeSection(event.target.id);
   return (
     <main>
       <h1 className="documentTitle">CSS Methodologies</h1>
@@ -11,7 +13,7 @@ const Oocss = ( {handler} ) => {
             <button
               id="prev"
               className={`buttonBorderless bgGreyDark${firstSection() ? " disabled" : ""}`}
-              onClick={handler}
+              onClick={onSectionButtonClickHandler}
             >◄ previous</button>
           </div>
           <h2 className="sectionTitle clYellowPale">OOCSS (Object Oriented CSS)</h2>
@@ -19,7 +21,7 @@ const Oocss = ( {handler} ) => {
             <button
               id="next"
               className={`buttonBorderless bgGreyDark${lastSection() ? " disabled" : ""}`}
-              onClick={handler}
+              onClick={onSectionButtonClickHandler}
             >next ►</button>
           </div>
         </div>

@@ -12,20 +12,27 @@ const Bem = () => {
     filterList,
     setActiveListItem
   } = useStoreActions();
-  const onSectionButtonClickHandler = event => changeSection(event.target.id);
+
   const activeTab = useDbStore(state => state.activeTab);
   const tabs = useDbStore(state => state.tabs);
   const activeListItem = useDbStore(state => state.activeListItem);
-  let list = filterList();
+  const list = useDbStore(state => state.list);
 
-  const menuHandler = async event => {
+  const sectionHandler = event => changeSection(event.target.id);
+
+  const menuHandler = event => {
     // extract the number from the supplement class "...menu-item--${number}"
-    setActiveTab(Number(event.currentTarget.className.replace(/\D+/g, '')) - 1);
-    list = filterList();
+    setActiveTab(Number(event.target.className.replace(/\D+/g, '')) - 1);
+    filterList(document.getElementById("search").value);
     setActiveListItem(0);
   };
 
-  const listHandler = event => setActiveListItem(Number(event.currentTarget.id));
+  const listHandler = event => setActiveListItem(Number(event.target.id));
+
+  const searchHandler = () => {
+    filterList(document.getElementById("search").value);
+    setActiveListItem(0);
+  };
 
   return (
     <main>
@@ -36,7 +43,7 @@ const Bem = () => {
             <button
               id="prev"
               className={`carousel__button${firstSection() ? " carousel__button--disabled" : ""}`}
-              onClick={onSectionButtonClickHandler}
+              onClick={sectionHandler}
             >◄ previous</button>
           </div>
           <h2 className="section-container__header section-container__header--main">BEM (Block - Element - Modifier)</h2>
@@ -44,7 +51,7 @@ const Bem = () => {
             <button
               id="next"
               className={`carousel__button${lastSection() ? " carousel__button--disabled" : ""}`}
-              onClick={onSectionButtonClickHandler}
+              onClick={sectionHandler}
             >next ►</button>
           </div>
         </div>
@@ -91,8 +98,14 @@ const Bem = () => {
           </div>
           <div className="chili-db__browser">
             <div className="chili-db__list-container">
-              <div className="chili-db__list-search-field"></div>
-              <div className="chili-db__list-column">
+              <input
+                id="search"
+                type="search"
+                placeholder="Quick search"
+                onChange={searchHandler}
+                className="chili-db__list-search-field"
+              ></input>
+              {list.length > 0 && <div className="chili-db__list-column">
                 {list.map((e, i) =>
                   <div
                     id={i}
@@ -101,9 +114,9 @@ const Bem = () => {
                     ${ activeListItem === i ? "chili-db__list-item--active" : "" }`}
                     onClick={listHandler}
                   >{e.name}</div>)}
-              </div>
+              </div>}
             </div>
-            <div className="chili-db__preview-column">
+            {list.length > 0 && <div className="chili-db__preview-column">
               <h3 className="chili-db__preview-title">{list[activeListItem].name}</h3>
               <div className="chili-db__preview-img-container">
                 <Image
@@ -134,7 +147,7 @@ const Bem = () => {
                 </li>
               </ul>
               <p className="chili-db__preview-description">{list[activeListItem].description}</p>
-            </div>
+            </div>}
             </div>
           <div className="chili-db__footer"></div>
         </div>

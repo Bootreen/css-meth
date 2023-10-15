@@ -13,6 +13,7 @@ const dbStore = (set, get) => ({
   section: 0,
   tabs: initialTabs,
   activeTab: 0,
+  initialList: chilies,
   list: chilies,
   activeListItem: 0,
 
@@ -35,8 +36,10 @@ const dbStore = (set, get) => ({
 
     setActiveTab: (tabId) => set({activeTab: tabId}),
 
-    filterList: () => get().list.filter(e =>
-      get().tabs[get().activeTab] === 'all' ? true : e.species === get().tabs[get().activeTab]),
+    filterList: filterPhrase => set({list: get().initialList.filter(e =>
+      get().tabs[get().activeTab] === 'all' ? true : e.species === get().tabs[get().activeTab])
+      .filter(e => filterPhrase ? e.name.toLocaleLowerCase().includes(filterPhrase) : true )
+    }),
 
     setActiveListItem: (itemId) => set({activeListItem: itemId}),
   }

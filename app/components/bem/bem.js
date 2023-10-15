@@ -11,12 +11,14 @@ const Bem = () => {
     changeSection,
     setActiveTab,
     filterList,
-    setActiveListItem
+    setActiveListItem,
+    setSearchString,
   } = useStoreActions();
 
   const activeTab = useDbStore(state => state.activeTab);
   const tabs = useDbStore(state => state.tabs);
   const activeListItem = useDbStore(state => state.activeListItem);
+  const searchString = useDbStore(state => state.searchString);
   const list = useDbStore(state => state.list);
 
   const sectionHandler = event => changeSection(event.target.id);
@@ -24,26 +26,25 @@ const Bem = () => {
   const menuHandler = event => {
     // extract the number from the supplement class "...menu-item--${number}"
     setActiveTab(Number(event.target.className.replace(/\D+/g, '')) - 1);
-    filterList(document.getElementById("search").value.toLocaleLowerCase());
+    filterList();
     setActiveListItem(0);
   };
 
   const listHandler = event => setActiveListItem(Number(event.target.id));
 
-  const searchHandler = () => {
-    filterList(document.getElementById("search").value.toLocaleLowerCase());
+  const searchHandler = event => {
+    setSearchString(event.target.value.toLocaleLowerCase());
+    filterList();
     setActiveListItem(0);
   };
 
-  const highlightText = text => {
-    const chunks = text.split(new RegExp(`(${document.getElementById("search")
-      .value.toLocaleLowerCase()})`, 'gi'));
+  const highlightText = (text, highlight) => {
+    const chunks = text.split(new RegExp(`(${highlight.toLocaleLowerCase()})`, 'gi'));
     return (
       <Fragment>
-        {chunks.map((c, i) => c.toLocaleLowerCase() === document.getElementById("search")
-          .value.toLocaleLowerCase() ?
-            <span key={i} className="chili-db__list-item--highlighted">{c}</span> :
-              <Fragment key={i}>{c}</Fragment>)}
+        {chunks.map((c, i) => c.toLocaleLowerCase() === highlight.toLocaleLowerCase() ?
+          <span key={i} className="chili-db__list-item--highlighted">{c}</span> :
+            <Fragment key={i}>{c}</Fragment>)}
       </Fragment>
     )
   };
@@ -127,7 +128,7 @@ const Bem = () => {
                     className={`chili-db__list-item
                     ${ activeListItem === i ? "chili-db__list-item--active" : "" }`}
                     onClick={listHandler}
-                  >{highlightText(e.name)}</div>)}
+                  >{highlightText(e.name, searchString)}</div>)}
               </div>}
             </div>
             {list.length > 0 && <div className="chili-db__preview-column">

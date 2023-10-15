@@ -16,6 +16,7 @@ const dbStore = (set, get) => ({
   initialList: chilies,
   list: chilies,
   activeListItem: 0,
+  searchString: '',
 
   actions: {
 
@@ -34,14 +35,16 @@ const dbStore = (set, get) => ({
       if (destination === "prev") get().actions.decSection();
     },
 
-    setActiveTab: (tabId) => set({activeTab: tabId}),
+    setActiveTab: tabId => set({activeTab: tabId}),
 
-    filterList: filterPhrase => set({list: get().initialList.filter(e =>
+    filterList: () => set({list: get().initialList.filter(e =>
       get().tabs[get().activeTab] === 'all' ? true : e.species === get().tabs[get().activeTab])
-      .filter(e => filterPhrase ? e.name.toLocaleLowerCase().includes(filterPhrase) : true)
+        .filter(e => e.name.toLocaleLowerCase().includes(get().searchString))
     }),
 
-    setActiveListItem: (itemId) => set({activeListItem: itemId}),
+    setActiveListItem: itemId => set({activeListItem: itemId}),
+
+    setSearchString: newSearchString => set({searchString: newSearchString}),
   }
 });
 

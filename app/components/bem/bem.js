@@ -2,6 +2,7 @@ import './bem.css';
 import Image from 'next/image';
 import { useDbStore, useStoreActions } from '../store/store';
 import { imagePrefix } from '../chiliesdb/chiliesdb';
+import { Fragment } from 'react';
 
 const Bem = () => {
   const {
@@ -23,15 +24,28 @@ const Bem = () => {
   const menuHandler = event => {
     // extract the number from the supplement class "...menu-item--${number}"
     setActiveTab(Number(event.target.className.replace(/\D+/g, '')) - 1);
-    filterList(document.getElementById("search").value);
+    filterList(document.getElementById("search").value.toLocaleLowerCase());
     setActiveListItem(0);
   };
 
   const listHandler = event => setActiveListItem(Number(event.target.id));
 
   const searchHandler = () => {
-    filterList(document.getElementById("search").value);
+    filterList(document.getElementById("search").value.toLocaleLowerCase());
     setActiveListItem(0);
+  };
+
+  const highlightText = text => {
+    const chunks = text.split(new RegExp(`(${document.getElementById("search")
+      .value.toLocaleLowerCase()})`, 'gi'));
+    return (
+      <Fragment>
+        {chunks.map((c, i) => c.toLocaleLowerCase() === document.getElementById("search")
+          .value.toLocaleLowerCase() ?
+            <span key={i} className="chili-db__list-item--highlighted">{c}</span> :
+              <Fragment key={i}>{c}</Fragment>)}
+      </Fragment>
+    )
   };
 
   return (
@@ -113,7 +127,7 @@ const Bem = () => {
                     className={`chili-db__list-item
                     ${ activeListItem === i ? "chili-db__list-item--active" : "" }`}
                     onClick={listHandler}
-                  >{e.name}</div>)}
+                  >{highlightText(e.name)}</div>)}
               </div>}
             </div>
             {list.length > 0 && <div className="chili-db__preview-column">
@@ -122,6 +136,7 @@ const Bem = () => {
                 <Image
                   className="chili-db__preview-img"
                   fill={true}
+                  sizes="(max-width: 500px) 100vw"
                   src={imagePrefix + list[activeListItem].image}
                   alt={list[activeListItem].name}
                 />

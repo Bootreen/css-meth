@@ -38,7 +38,7 @@ const dbStore = (set, get) => ({
 
     filterList: filterPhrase => set({list: get().initialList.filter(e =>
       get().tabs[get().activeTab] === 'all' ? true : e.species === get().tabs[get().activeTab])
-      .filter(e => filterPhrase ? e.name.toLocaleLowerCase().includes(filterPhrase) : true )
+      .filter(e => filterPhrase ? e.name.toLocaleLowerCase().includes(filterPhrase) : true)
     }),
 
     setActiveListItem: (itemId) => set({activeListItem: itemId}),

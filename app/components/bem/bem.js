@@ -13,13 +13,22 @@ const Bem = () => {
     filterList,
     setActiveListItem,
     setSearchString,
+    toogleModalFilter,
+    plantSizeChecks,
   } = useStoreActions();
 
   const activeTab = useDbStore(state => state.activeTab);
   const tabs = useDbStore(state => state.tabs);
   const activeListItem = useDbStore(state => state.activeListItem);
+  const isModalVisible = useDbStore(state => state.isModalVisible);
   const searchString = useDbStore(state => state.searchString);
   const list = useDbStore(state => state.list);
+  const plantSizes = useDbStore(state => state.plantSizes);
+  const fruitSizes = useDbStore(state => state.fruitSizes);
+  const shapes = useDbStore(state => state.shapes);
+  const shapeTraits = useDbStore(state => state.shapeTraits);
+  const colors = useDbStore(state => state.colors);
+  const colorTraits = useDbStore(state => state.colorTraits);
 
   const sectionHandler = event => changeSection(event.target.id);
 
@@ -32,6 +41,12 @@ const Bem = () => {
 
   const listHandler = event => setActiveListItem(Number(event.target.id));
 
+  const filterHandler = () => toogleModalFilter();
+
+  const plantSizeFilter = event => {
+    plantSizeChecks(event.target.id.split('_')[1]);
+  }
+
   const searchHandler = event => {
     setSearchString(event.target.value.toLocaleLowerCase());
     filterList();
@@ -39,10 +54,10 @@ const Bem = () => {
   };
 
   const highlightText = (text, highlight) => {
-    const chunks = text.split(new RegExp(`(${highlight.toLocaleLowerCase()})`, 'gi'));
+    const chunks = text.split(new RegExp(`(${highlight})`, 'gi'));
     return (
       <Fragment>
-        {chunks.map((c, i) => c.toLocaleLowerCase() === highlight.toLocaleLowerCase() ?
+        {chunks.map((c, i) => c.toLocaleLowerCase() === highlight ?
           <span key={i} className="chili-db__list-item--highlighted">{c}</span> :
             <Fragment key={i}>{c}</Fragment>)}
       </Fragment>
@@ -51,6 +66,69 @@ const Bem = () => {
 
   return (
     <main>
+
+      <div className={`modal-filter${isModalVisible ? " modal-filter--visible" : ""}`}>
+        <h4 className="modal-filter__header">
+          Filters
+          <span className="modal-filter__close-button" onClick={filterHandler}>&times;</span>
+        </h4>
+        <div className="modal-filter__columns-container">
+          <div className="modal-filter__column">
+            <h5 className="modal-filter__subheader">Plant size</h5>
+            {plantSizes.map((e, i) => {
+              const size = Object.keys(e)[0];
+              const { [size]: checked } = plantSizes.filter(e => Object.hasOwn(e, size))[0];
+              return (
+                <div className="modal-filter__checkbox-element" key={i}>
+                  <input
+                    type="checkbox"
+                    id={`plant-size_${size}`}
+                    checked={checked}
+                    onClick={plantSizeFilter}
+                  />
+                  <label htmlFor={`plant-size_${size}`} >{size}</label>
+                </div>
+              )
+            })}
+          </div>
+          <div className="modal-filter__column">
+            <h5 className="modal-filter__subheader">Fruit size</h5>
+            {fruitSizes.map((e, i) => {
+              const size = Object.keys(e)[0];
+              const { [size]: checked } = fruitSizes.filter(e => Object.hasOwn(e, size))[0];
+              return (
+                <div className="modal-filter__checkbox-element" key={i}>
+                  <input type="checkbox" id={`fruit-size_${size}`} checked={checked} />
+                  <label htmlFor={`fruit-size_${size}`} >{size}</label>
+                </div>
+              )
+            })}
+          </div>
+          <div className="modal-filter__column">
+            <h5 className="modal-filter__subheader">Fruit shape</h5>
+            {shapes.map((e, i) => {
+              const shape = Object.keys(e)[0];
+              const { [shape]: checked } = shapes.filter(e => Object.hasOwn(e, shape))[0];
+              return (
+                <div className="modal-filter__checkbox-element" key={i}>
+                  <input type="checkbox" id={`shape_${shape}`} checked={checked} />
+                  <label htmlFor={`shape_${shape}`}>{shape}</label>
+                </div>
+              )
+            })}
+          </div>
+          {/*<div>
+            {shapeTraits.map((e, i) => <div key={i}>{e.keys()[0]}</div>)}
+          </div>
+          <div>
+            {colors.map((e, i) => <div key={i}>{e.keys()[0]}</div>)}
+          </div>
+          <div>
+            {colorTraits.map((e, i) => <div key={i}>{e.keys()[0]}</div>)}
+          </div>*/}
+        </div>
+      </div>
+
       <h1 className="document-title">CSS Methodologies</h1>
       <div className="section-container">
         <div className="carousel">
@@ -103,16 +181,20 @@ const Bem = () => {
           </div>
           <div className="chili-db__menu">
             {tabs.map((e, i) =>
-              <h4
+              <h5
                 key={i}
                 className={`chili-db__menu-item chili-db__menu-item--${i + 1}
                 ${ activeTab === i ? " chili-db__menu-item--active" : "" }`}
                 onClick={menuHandler}
-              >{e[0].toLocaleUpperCase() + e.slice(1)}</h4>)}
+              >{e[0].toLocaleUpperCase() + e.slice(1)}</h5>)}
             <div className="chili-db__menu-item--placeholder"></div>
           </div>
           <div className="chili-db__browser">
-            <div className="chili-db__list-container">
+            <div className="chili-db__list-search-container">
+              <button
+                className="chili-db__list-filter"
+                onClick={filterHandler}
+              >Filter</button>
               <input
                 id="search"
                 type="search"
@@ -120,6 +202,8 @@ const Bem = () => {
                 onChange={searchHandler}
                 className="chili-db__list-search-field"
               ></input>
+            </div>
+            <div className="chili-db__list-container">
               {list.length > 0 && <div className="chili-db__list-column">
                 {list.map((e, i) =>
                   <div
@@ -164,8 +248,7 @@ const Bem = () => {
               </ul>
               <p className="chili-db__preview-description">{list[activeListItem].description}</p>
             </div>}
-            </div>
-          <div className="chili-db__footer"></div>
+          </div>
         </div>
 
         <h3 className="section-container__header">Пример стилизации текущего документа по BEM:</h3>

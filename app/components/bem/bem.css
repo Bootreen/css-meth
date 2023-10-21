@@ -87,11 +87,10 @@
 .chili-db__menu {
   display: flex;
   flex-flow: row wrap;
-  z-index: 20;
 }
 
 .chili-db__menu-item {
-  padding: 0.7rem 0.7rem 0.7rem 1.4rem;
+  padding: 0.6rem 0.6rem 0.6rem 1.2rem;
   margin-right: -0.7rem;
   border-top: 0.125rem solid #000;
   border-right: 0.125rem solid #000;
@@ -144,22 +143,42 @@
 }
 
 .chili-db__browser {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  grid-template-areas:
+    "search browser"
+    "list browser";
+  background: #ddd;
+}
+
+.chili-db__list-search-container {
+  grid-area: search;
   display: flex;
   flex-direction: row;
-  background: #ddd;
+  column-gap: 0.5rem;
+  padding: 1rem;
+}
+
+.chili-db__list-filter {
+  width: 6rem;
+  height: 2rem;
+  &:hover {
+    background-color: #111;
+    color: #f7e38f;
+  }
 }
 
 .chili-db__list-search-field {
   width: 100%;
   height: 2rem;
-  margin-bottom: 0.8rem;
   font-size: 1rem;
+  padding-left: 0.25rem;
 }
 
 .chili-db__list-container {
-  flex-basis: 30%;
+  grid-area: list;
   height: 40rem;
-  margin: 1rem;
+  margin: 0 1rem;
   overflow-y: auto;
 }
 
@@ -180,7 +199,7 @@
 }
 
 .chili-db__preview-column {
-  flex-basis: 70%;
+  grid-area: browser;
   align-self: center;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -226,6 +245,48 @@
 
 .chili-db__preview-description {
   grid-area: description;
+}
+
+.modal-filter {
+  display: none;
+  position: fixed;
+  z-index: 30;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+  background-color: #fff;
+  border: 0.25rem outset;
+}
+
+.modal-filter--visible {
+  display: block;
+}
+
+.modal-filter__header {
+  text-align: center;
+  margin-top: 0.125rem;
+}
+
+.modal-filter__close-button {
+  float: right;
+  padding: 0 0.25rem;
+  &:hover, &:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.modal-filter__columns-container {
+  display: flex;
+  flex-direction: row;
+  padding: 1.125rem;
+  column-gap: 2rem;
+}
+
+.modal-filter__column {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 1280px) {

@@ -263,8 +263,14 @@
 }
 
 .modal-filter__header {
+  font-size: 1.4rem;
   text-align: center;
   margin-top: 0.125rem;
+}
+
+.modal-filter__subheader {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
 .modal-filter__close-button {
@@ -287,6 +293,48 @@
 .modal-filter__column {
   display: flex;
   flex-direction: column;
+}
+
+.modal-filter__checkbox-element {
+  display: flex;
+  flex-direction: row;
+}
+
+.modal-filter__checkbox {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.25rem 0;
+}
+
+.modal-filter__label {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.modal-filter__dropdown {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-filter__tag {
+  font-size: 1.2rem;
+  line-height: 100%;
+  width: min-content;
+  padding: 0 0.25rem 0.25rem 0.25rem;
+  margin-bottom: 0.25rem;
+  border-radius: 0.25rem;
+  background-color: #609255;
+  color: #eee;
+  &:hover, &:focus {
+    color: #ffd51a;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.modal-filter__tag-remove-button {
+  font-size: 1.4rem;
+  margin-left: 0.25rem;
 }
 
 @media (max-width: 1280px) {

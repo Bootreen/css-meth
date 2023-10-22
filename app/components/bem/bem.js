@@ -14,7 +14,13 @@ const Bem = () => {
     setActiveListItem,
     setSearchString,
     toogleModalFilter,
+    spicinessChecks,
     plantSizeChecks,
+    fruitSizeChecks,
+    shapeChecks,
+    shapeTraitChecks,
+    colorChecks,
+    colorTraitChecks,
   } = useStoreActions();
 
   const activeTab = useDbStore(state => state.activeTab);
@@ -23,6 +29,7 @@ const Bem = () => {
   const isModalVisible = useDbStore(state => state.isModalVisible);
   const searchString = useDbStore(state => state.searchString);
   const list = useDbStore(state => state.list);
+  const spiciness = useDbStore(state => state.spiciness);
   const plantSizes = useDbStore(state => state.plantSizes);
   const fruitSizes = useDbStore(state => state.fruitSizes);
   const shapes = useDbStore(state => state.shapes);
@@ -31,22 +38,25 @@ const Bem = () => {
   const colorTraits = useDbStore(state => state.colorTraits);
 
   const sectionHandler = event => changeSection(event.target.id);
-
   const menuHandler = event => {
     // extract the number from the supplement class "...menu-item--${number}"
     setActiveTab(Number(event.target.className.replace(/\D+/g, '')) - 1);
     filterList();
     setActiveListItem(0);
   };
-
   const listHandler = event => setActiveListItem(Number(event.target.id));
-
   const filterHandler = () => toogleModalFilter();
-
-  const plantSizeFilter = event => {
-    plantSizeChecks(event.target.id.split('_')[1]);
-  }
-
+  const spicinessFilter = event => spicinessChecks(event.target.id.split('_')[1]);
+  const plantSizeFilter = event => plantSizeChecks(event.target.id.split('_')[1]);
+  const fruitSizeFilter = event => fruitSizeChecks(event.target.id.split('_')[1]);
+  const shapesAddFilter = event => shapeChecks(event.target.value);
+  const shapesRemoveFilter = event => shapeChecks(event.currentTarget.getAttribute('customvalue'));
+  const shapeTraitsAddFilter = event => shapeTraitChecks(event.target.value);
+  const shapeTraitsRemoveFilter = event => shapeTraitChecks(event.currentTarget.getAttribute('customvalue'));
+  const colorsAddFilter = event => colorChecks(event.target.value);
+  const colorsRemoveFilter = event => colorChecks(event.currentTarget.getAttribute('customvalue'));
+  const colorTraitsAddFilter = event => colorTraitChecks(event.target.value);
+  const colorTraitsRemoveFilter = event => colorTraitChecks(event.currentTarget.getAttribute('customvalue'));
   const searchHandler = event => {
     setSearchString(event.target.value.toLocaleLowerCase());
     filterList();
@@ -58,8 +68,8 @@ const Bem = () => {
     return (
       <Fragment>
         {chunks.map((c, i) => c.toLocaleLowerCase() === highlight ?
-          <span key={i} className="chili-db__list-item--highlighted">{c}</span> :
-            <Fragment key={i}>{c}</Fragment>)}
+          <span key={`hl-chunk-${i}`} className="chili-db__list-item--highlighted">{c}</span> :
+            <Fragment key={`void-chunk-${i}`}>{c}</Fragment>)}
       </Fragment>
     )
   };
@@ -74,19 +84,45 @@ const Bem = () => {
         </h4>
         <div className="modal-filter__columns-container">
           <div className="modal-filter__column">
+            <h5 className="modal-filter__subheader">Spiciness</h5>
+            {spiciness.map((e, i) => {
+              const heatLevel = Object.keys(e)[0];
+              const { [heatLevel]: checked } = spiciness.filter(e => Object.hasOwn(e, heatLevel))[0];
+              return (
+                <div className="modal-filter__checkbox-element" key={`${i}-spiciness_${heatLevel}`}>
+                  <input
+                    className="modal-filter__checkbox"
+                    type="checkbox"
+                    id={`spiciness_${heatLevel}`}
+                    defaultChecked={checked}
+                    onClick={spicinessFilter}
+                  />
+                  <label
+                    className="modal-filter__label"
+                    htmlFor={`spiciness_${heatLevel}`}
+                  >{heatLevel}</label>
+                </div>
+              )
+            })}
+          </div>
+          <div className="modal-filter__column">
             <h5 className="modal-filter__subheader">Plant size</h5>
             {plantSizes.map((e, i) => {
-              const size = Object.keys(e)[0];
-              const { [size]: checked } = plantSizes.filter(e => Object.hasOwn(e, size))[0];
+              const plantSize = Object.keys(e)[0];
+              const { [plantSize]: checked } = plantSizes.filter(e => Object.hasOwn(e, plantSize))[0];
               return (
-                <div className="modal-filter__checkbox-element" key={i}>
+                <div className="modal-filter__checkbox-element" key={`${i}-plant-size_${plantSize}`}>
                   <input
+                    className="modal-filter__checkbox"
                     type="checkbox"
-                    id={`plant-size_${size}`}
-                    checked={checked}
+                    id={`plant-size_${plantSize}`}
+                    defaultChecked={checked}
                     onClick={plantSizeFilter}
                   />
-                  <label htmlFor={`plant-size_${size}`} >{size}</label>
+                  <label
+                    className="modal-filter__label"
+                    htmlFor={`plant-size_${plantSize}`}
+                  >{plantSize}</label>
                 </div>
               )
             })}
@@ -94,38 +130,159 @@ const Bem = () => {
           <div className="modal-filter__column">
             <h5 className="modal-filter__subheader">Fruit size</h5>
             {fruitSizes.map((e, i) => {
-              const size = Object.keys(e)[0];
-              const { [size]: checked } = fruitSizes.filter(e => Object.hasOwn(e, size))[0];
+              const fruitSize = Object.keys(e)[0];
+              const { [fruitSize]: checked } = fruitSizes.filter(e => Object.hasOwn(e, fruitSize))[0];
               return (
-                <div className="modal-filter__checkbox-element" key={i}>
-                  <input type="checkbox" id={`fruit-size_${size}`} checked={checked} />
-                  <label htmlFor={`fruit-size_${size}`} >{size}</label>
+                <div className="modal-filter__checkbox-element" key={`${i}-fruit-size_${fruitSize}`}>
+                  <input
+                    className="modal-filter__checkbox"
+                    type="checkbox"
+                    id={`fruit-size_${fruitSize}`}
+                    defaultChecked={checked}
+                    onClick={fruitSizeFilter}
+                  />
+                  <label
+                    className="modal-filter__label"
+                    htmlFor={`fruit-size_${fruitSize}`}
+                  >{fruitSize}</label>
                 </div>
               )
             })}
           </div>
           <div className="modal-filter__column">
             <h5 className="modal-filter__subheader">Fruit shape</h5>
+            <select className="modal-filter__dropdown" disabled={shapes[0].all} onChange={shapesAddFilter}>
+              <option defaultValue>select shape</option>
+              {shapes.map((e, i) => {
+                const shape = Object.keys(e)[0];
+                const { [shape]: checked } = shapes.filter(e => Object.hasOwn(e, shape))[0];
+                return (
+                  !checked ?
+                    <option
+                      key={`${i}-shape-dropdown-item_${shape}`}
+                      value={shape}
+                    >{shape}</option> :
+                      <Fragment key={`${i}-shape-dropdown-item_${shape}`}></Fragment>
+                )
+              })}
+            </select>
             {shapes.map((e, i) => {
               const shape = Object.keys(e)[0];
               const { [shape]: checked } = shapes.filter(e => Object.hasOwn(e, shape))[0];
               return (
-                <div className="modal-filter__checkbox-element" key={i}>
-                  <input type="checkbox" id={`shape_${shape}`} checked={checked} />
-                  <label htmlFor={`shape_${shape}`}>{shape}</label>
-                </div>
+                checked ?
+                  <div
+                    key={`${i}-shape-tag_${shape}`}
+                    className="modal-filter__tag"
+                    customvalue={shape}
+                    onClick={shapesRemoveFilter}
+                  >
+                    {shape}<span className="modal-filter__tag-remove-button">&times;</span>
+                  </div> :
+                    <Fragment key={`${i}-shape-tag_${shape}`}></Fragment>
+              )
+            })}
+            <br/>
+            <h5 className="modal-filter__subheader">Shape trait</h5>
+            <select className="modal-filter__dropdown" disabled={shapeTraits[0].all} onChange={shapeTraitsAddFilter}>
+              <option defaultValue>select trait</option>
+              {shapeTraits.map((e, i) => {
+                const shapeTrait = Object.keys(e)[0];
+                const { [shapeTrait]: checked } = shapeTraits.filter(e => Object.hasOwn(e, shapeTrait))[0];
+                return (
+                  !checked ?
+                    <option
+                      key={`${i}-shape-trait-dropdown-item_${shapeTrait}`}
+                      value={shapeTrait}
+                    >{shapeTrait}</option> :
+                      <Fragment key={`${i}-shape-trait-dropdown-item_${shapeTrait}`}></Fragment>
+                )
+              })}
+            </select>
+            {shapeTraits.map((e, i) => {
+              const shapeTrait = Object.keys(e)[0];
+              const { [shapeTrait]: checked } = shapeTraits.filter(e => Object.hasOwn(e, shapeTrait))[0];
+              return (
+                checked ?
+                  <div
+                    key={`${i}-shape-trait-tag_${shapeTrait}`}
+                    className="modal-filter__tag"
+                    customvalue={shapeTrait}
+                    onClick={shapeTraitsRemoveFilter}
+                  >
+                    {shapeTrait}<span className="modal-filter__tag-remove-button">&times;</span>
+                  </div> :
+                    <Fragment key={`${i}-shape-trait-tag_${shapeTrait}`}></Fragment>
               )
             })}
           </div>
-          {/*<div>
-            {shapeTraits.map((e, i) => <div key={i}>{e.keys()[0]}</div>)}
+          <div className="modal-filter__column">
+            <h5 className="modal-filter__subheader">Fruit color</h5>
+            <select className="modal-filter__dropdown" disabled={colors[0].all} onChange={colorsAddFilter}>
+              <option defaultValue>select color</option>
+              {colors.map((e, i) => {
+                const color = Object.keys(e)[0];
+                const { [color]: checked } = colors.filter(e => Object.hasOwn(e, color))[0];
+                return (
+                  !checked ?
+                    <option
+                      key={`${i}-color-dropdown-item_${color}`}
+                      value={color}
+                    >{color}</option> :
+                      <Fragment key={`${i}-color-dropdown-item_${color}`}></Fragment>
+                )
+              })}
+            </select>
+            {colors.map((e, i) => {
+              const color = Object.keys(e)[0];
+              const { [color]: checked } = colors.filter(e => Object.hasOwn(e, color))[0];
+              return (
+                checked ?
+                  <div
+                    key={`${i}-color-tag_${color}`}
+                    className="modal-filter__tag"
+                    customvalue={color}
+                    onClick={colorsRemoveFilter}
+                  >
+                    {color}<span className="modal-filter__tag-remove-button">&times;</span>
+                  </div> :
+                    <Fragment key={`${i}-color-tag_${color}`}></Fragment>
+              )
+            })}
+            <br/>
+            <h5 className="modal-filter__subheader">Color trait</h5>
+            <select className="modal-filter__dropdown" disabled={colorTraits[0].all} onChange={colorTraitsAddFilter}>
+              <option defaultValue>select trait</option>
+              {colorTraits.map((e, i) => {
+                const colorTrait = Object.keys(e)[0];
+                const { [colorTrait]: checked } = colorTraits.filter(e => Object.hasOwn(e, colorTrait))[0];
+                return (
+                  !checked ?
+                    <option
+                      key={`${i}-color-trait-dropdown-item_${colorTrait}`}
+                      value={colorTrait}
+                    >{colorTrait}</option> :
+                      <Fragment key={`${i}-color-trait-dropdown-item_${colorTrait}`}></Fragment>
+                )
+              })}
+            </select>
+            {colorTraits.map((e, i) => {
+              const colorTrait = Object.keys(e)[0];
+              const { [colorTrait]: checked } = colorTraits.filter(e => Object.hasOwn(e, colorTrait))[0];
+              return (
+                checked ?
+                  <div
+                    key={`${i}-color-trait-tag_${colorTrait}`}
+                    className="modal-filter__tag"
+                    customvalue={colorTrait}
+                    onClick={colorTraitsRemoveFilter}
+                  >
+                    {colorTrait}<span className="modal-filter__tag-remove-button">&times;</span>
+                  </div> :
+                    <Fragment key={`${i}-color-trait-tag_${colorTrait}`}></Fragment>
+              )
+            })}
           </div>
-          <div>
-            {colors.map((e, i) => <div key={i}>{e.keys()[0]}</div>)}
-          </div>
-          <div>
-            {colorTraits.map((e, i) => <div key={i}>{e.keys()[0]}</div>)}
-          </div>*/}
         </div>
       </div>
 
@@ -182,7 +339,7 @@ const Bem = () => {
           <div className="chili-db__menu">
             {tabs.map((e, i) =>
               <h5
-                key={i}
+                key={`${i}-${e}`}
                 className={`chili-db__menu-item chili-db__menu-item--${i + 1}
                 ${ activeTab === i ? " chili-db__menu-item--active" : "" }`}
                 onClick={menuHandler}
@@ -208,7 +365,7 @@ const Bem = () => {
                 {list.map((e, i) =>
                   <div
                     id={i}
-                    key={i}
+                    key={`${i}-${e.name}`}
                     className={`chili-db__list-item
                     ${ activeListItem === i ? "chili-db__list-item--active" : "" }`}
                     onClick={listHandler}
@@ -222,6 +379,7 @@ const Bem = () => {
                   className="chili-db__preview-img"
                   fill={true}
                   sizes="(max-width: 500px) 100vw"
+                  priority={true}
                   src={imagePrefix + list[activeListItem].image}
                   alt={list[activeListItem].name}
                 />

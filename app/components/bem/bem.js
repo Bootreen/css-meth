@@ -2,7 +2,8 @@ import './bem.css';
 import Image from 'next/image';
 import { useDbStore, useStoreActions } from '../store/store';
 import { imagePrefix } from '../chiliesdb/chiliesdb';
-import { Fragment } from 'react';
+import { highlightText, renderCheckboxes, renderDropDown, renderTags } from '../utils/renders';
+import * as tmpl from './class-names';
 
 const Bem = () => {
   const {
@@ -66,243 +67,84 @@ const Bem = () => {
     setActiveListItem(0);
   };
 
-  const highlightText = (text, highlight) => {
-    const chunks = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return (
-      <Fragment>
-        {chunks.map((c, i) => c.toLocaleLowerCase() === highlight ?
-          <span key={`hl-chunk-${i}`} className="chili-db__list-item--highlighted">{c}</span> :
-            <Fragment key={`void-chunk-${i}`}>{c}</Fragment>)}
-      </Fragment>
-    )
-  };
-
   return (
     <main>
-
-      <div className={`modal-filter${isModalVisible ? " modal-filter--visible" : ""}`}>
-        <h4 className="modal-filter__header">
-          Filters
-          <span className="modal-filter__close-button" onClick={filterHandler}>&times;</span>
+      {/* filter modal window */}
+      <div className={tmpl.modalWnd(isModalVisible)}>
+        <h4 className={tmpl.modalHdr}>
+          Filters<span className={tmpl.modalCloseBtn} onClick={filterHandler}>&times;</span>
         </h4>
-        <div className="modal-filter__columns-container">
-          <div className="modal-filter__column">
-            <h5 className="modal-filter__subheader">Spiciness</h5>
-            {spiciness.map((e, i) => {
-              const heatLevel = Object.keys(e)[0];
-              const { [heatLevel]: checked } = spiciness.filter(e => Object.hasOwn(e, heatLevel))[0];
-              return (
-                <div className="modal-filter__checkbox-element" key={`${i}-spiciness_${heatLevel}`}>
-                  <input
-                    className="modal-filter__checkbox"
-                    type="checkbox"
-                    id={`spiciness_${heatLevel}`}
-                    checked={checked}
-                    readOnly
-                    onClick={spicinessFilter}
-                  />
-                  <label
-                    className="modal-filter__label"
-                    htmlFor={`spiciness_${heatLevel}`}
-                  >{heatLevel}</label>
-                </div>
-              )
-            })}
+        <div className={tmpl.modalColumnsCntr}>
+          <div className={tmpl.modalColumn}>
+            <h5 className={tmpl.modalSubHdr}>Spiciness</h5>
+            {renderCheckboxes(spiciness, spicinessFilter, 'spiciness',
+              [tmpl.modalCheckboxEl, tmpl.modalCheckbox, tmpl.modalLbl])}
           </div>
-          <div className="modal-filter__column">
-            <h5 className="modal-filter__subheader">Plant size</h5>
-            {plantSizes.map((e, i) => {
-              const plantSize = Object.keys(e)[0];
-              const { [plantSize]: checked } = plantSizes.filter(e => Object.hasOwn(e, plantSize))[0];
-              return (
-                <div className="modal-filter__checkbox-element" key={`${i}-plant-size_${plantSize}`}>
-                  <input
-                    className="modal-filter__checkbox"
-                    type="checkbox"
-                    id={`plant-size_${plantSize}`}
-                    checked={checked}
-                    readOnly
-                    onClick={plantSizeFilter}
-                  />
-                  <label
-                    className="modal-filter__label"
-                    htmlFor={`plant-size_${plantSize}`}
-                  >{plantSize}</label>
-                </div>
-              )
-            })}
+          <div className={tmpl.modalColumn}>
+            <h5 className={tmpl.modalSubHdr}>Plant size</h5>
+            {renderCheckboxes(plantSizes, plantSizeFilter, 'plant-size',
+              [tmpl.modalCheckboxEl, tmpl.modalCheckbox, tmpl.modalLbl])}
           </div>
-          <div className="modal-filter__column">
-            <h5 className="modal-filter__subheader">Fruit size</h5>
-            {fruitSizes.map((e, i) => {
-              const fruitSize = Object.keys(e)[0];
-              const { [fruitSize]: checked } = fruitSizes.filter(e => Object.hasOwn(e, fruitSize))[0];
-              return (
-                <div className="modal-filter__checkbox-element" key={`${i}-fruit-size_${fruitSize}`}>
-                  <input
-                    className="modal-filter__checkbox"
-                    type="checkbox"
-                    id={`fruit-size_${fruitSize}`}
-                    checked={checked}
-                    readOnly
-                    onClick={fruitSizeFilter}
-                  />
-                  <label
-                    className="modal-filter__label"
-                    htmlFor={`fruit-size_${fruitSize}`}
-                  >{fruitSize}</label>
-                </div>
-              )
-            })}
+          <div className={tmpl.modalColumn}>
+            <h5 className={tmpl.modalSubHdr}>Fruit size</h5>
+            {renderCheckboxes(fruitSizes, fruitSizeFilter, 'fruit-size',
+              [tmpl.modalCheckboxEl, tmpl.modalCheckbox, tmpl.modalLbl])}
           </div>
-          <div className="modal-filter__column">
-            <h5 className="modal-filter__subheader">Fruit shape</h5>
-            <select className="modal-filter__dropdown" disabled={shapes[0].all} onChange={shapesAddFilter}>
+          <div className={tmpl.modalColumn}>
+            <h5 className={tmpl.modalSubHdr}>Fruit shape</h5>
+            <select
+              className={tmpl.modalDropDn}
+              disabled={shapes[0].all}
+              onChange={shapesAddFilter}
+            >
               <option defaultValue>select shape</option>
-              {shapes.map((e, i) => {
-                const shape = Object.keys(e)[0];
-                const { [shape]: checked } = shapes.filter(e => Object.hasOwn(e, shape))[0];
-                return (
-                  !checked ?
-                    <option
-                      key={`${i}-shape-dropdown-item_${shape}`}
-                      value={shape}
-                    >{shape}</option> :
-                      <Fragment key={`${i}-shape-dropdown-item_${shape}`}></Fragment>
-                )
-              })}
+              {renderDropDown(shapes, 'shape-dropdown-item')}
             </select>
-            {shapes.map((e, i) => {
-              const shape = Object.keys(e)[0];
-              const { [shape]: checked } = shapes.filter(e => Object.hasOwn(e, shape))[0];
-              return (
-                checked ?
-                  <div
-                    key={`${i}-shape-tag_${shape}`}
-                    className="modal-filter__tag"
-                    customvalue={shape}
-                    onClick={shapesRemoveFilter}
-                  >
-                    {shape}<span className="modal-filter__tag-remove-button">&times;</span>
-                  </div> :
-                    <Fragment key={`${i}-shape-tag_${shape}`}></Fragment>
-              )
-            })}
+            {renderTags(shapes, shapesRemoveFilter, 'shape-tag',
+              [tmpl.modalTag, tmpl.modalTagRemoveBtn])}
             <br/>
-            <h5 className="modal-filter__subheader">Shape trait</h5>
-            <select className="modal-filter__dropdown" disabled={shapeTraits[0].all} onChange={shapeTraitsAddFilter}>
+            <h5 className={tmpl.modalSubHdr}>Shape trait</h5>
+            <select
+              className={tmpl.modalDropDn}
+              disabled={shapeTraits[0].all}
+              onChange={shapeTraitsAddFilter}
+            >
               <option defaultValue>select trait</option>
-              {shapeTraits.map((e, i) => {
-                const shapeTrait = Object.keys(e)[0];
-                const { [shapeTrait]: checked } = shapeTraits.filter(e => Object.hasOwn(e, shapeTrait))[0];
-                return (
-                  !checked ?
-                    <option
-                      key={`${i}-shape-trait-dropdown-item_${shapeTrait}`}
-                      value={shapeTrait}
-                    >{shapeTrait}</option> :
-                      <Fragment key={`${i}-shape-trait-dropdown-item_${shapeTrait}`}></Fragment>
-                )
-              })}
+              {renderDropDown(shapeTraits, 'shape-trait-dropdown-item')}
             </select>
-            {shapeTraits.map((e, i) => {
-              const shapeTrait = Object.keys(e)[0];
-              const { [shapeTrait]: checked } = shapeTraits.filter(e => Object.hasOwn(e, shapeTrait))[0];
-              return (
-                checked ?
-                  <div
-                    key={`${i}-shape-trait-tag_${shapeTrait}`}
-                    className="modal-filter__tag"
-                    customvalue={shapeTrait}
-                    onClick={shapeTraitsRemoveFilter}
-                  >
-                    {shapeTrait}<span className="modal-filter__tag-remove-button">&times;</span>
-                  </div> :
-                    <Fragment key={`${i}-shape-trait-tag_${shapeTrait}`}></Fragment>
-              )
-            })}
+            {renderTags(shapeTraits, shapeTraitsRemoveFilter, 'shape-trait-tag',
+              [tmpl.modalTag, tmpl.modalTagRemoveBtn])}
           </div>
-          <div className="modal-filter__column">
-            <h5 className="modal-filter__subheader">Fruit color</h5>
-            <select className="modal-filter__dropdown" disabled={colors[0].all} onChange={colorsAddFilter}>
+          <div className={tmpl.modalColumn}>
+            <h5 className={tmpl.modalSubHdr}>Fruit color</h5>
+            <select
+              className={tmpl.modalDropDn}
+              disabled={colors[0].all}
+              onChange={colorsAddFilter}
+            >
               <option defaultValue>select color</option>
-              {colors.map((e, i) => {
-                const color = Object.keys(e)[0];
-                const { [color]: checked } = colors.filter(e => Object.hasOwn(e, color))[0];
-                return (
-                  !checked ?
-                    <option
-                      key={`${i}-color-dropdown-item_${color}`}
-                      value={color}
-                    >{color}</option> :
-                      <Fragment key={`${i}-color-dropdown-item_${color}`}></Fragment>
-                )
-              })}
+              {renderDropDown(colors, 'color-dropdown-item')}
             </select>
-            {colors.map((e, i) => {
-              const color = Object.keys(e)[0];
-              const { [color]: checked } = colors.filter(e => Object.hasOwn(e, color))[0];
-              return (
-                checked ?
-                  <div
-                    key={`${i}-color-tag_${color}`}
-                    className="modal-filter__tag"
-                    customvalue={color}
-                    onClick={colorsRemoveFilter}
-                  >
-                    {color}<span className="modal-filter__tag-remove-button">&times;</span>
-                  </div> :
-                    <Fragment key={`${i}-color-tag_${color}`}></Fragment>
-              )
-            })}
+            {renderTags(colors, colorsRemoveFilter, 'color-tag',
+              [tmpl.modalTag, tmpl.modalTagRemoveBtn])}
             <br/>
-            <h5 className="modal-filter__subheader">Color trait</h5>
-            <select className="modal-filter__dropdown" disabled={colorTraits[0].all} onChange={colorTraitsAddFilter}>
+            <h5 className={tmpl.modalSubHdr}>Color trait</h5>
+            <select
+              className={tmpl.modalDropDn}
+              disabled={colorTraits[0].all}
+              onChange={colorTraitsAddFilter}
+            >
               <option defaultValue>select trait</option>
-              {colorTraits.map((e, i) => {
-                const colorTrait = Object.keys(e)[0];
-                const { [colorTrait]: checked } = colorTraits.filter(e => Object.hasOwn(e, colorTrait))[0];
-                return (
-                  !checked ?
-                    <option
-                      key={`${i}-color-trait-dropdown-item_${colorTrait}`}
-                      value={colorTrait}
-                    >{colorTrait}</option> :
-                      <Fragment key={`${i}-color-trait-dropdown-item_${colorTrait}`}></Fragment>
-                )
-              })}
+              {renderDropDown(colorTraits, 'color-trait-dropdown-item')}
             </select>
-            {colorTraits.map((e, i) => {
-              const colorTrait = Object.keys(e)[0];
-              const { [colorTrait]: checked } = colorTraits.filter(e => Object.hasOwn(e, colorTrait))[0];
-              return (
-                checked ?
-                  <div
-                    key={`${i}-color-trait-tag_${colorTrait}`}
-                    className="modal-filter__tag"
-                    customvalue={colorTrait}
-                    onClick={colorTraitsRemoveFilter}
-                  >
-                    {colorTrait}<span className="modal-filter__tag-remove-button">&times;</span>
-                  </div> :
-                    <Fragment key={`${i}-color-trait-tag_${colorTrait}`}></Fragment>
-              )
-            })}
+            {renderTags(colorTraits, colorTraitsRemoveFilter, 'color-trait-tag',
+              [tmpl.modalTag, tmpl.modalTagRemoveBtn])}
           </div>
         </div>
-        <div className="modal-filter__controls-container">
-          <button
-            className="modal-filter__control-button"
-            onClick={selectAll}
-          >Select all</button>
-          <button
-            className="modal-filter__control-button"
-            onClick={selectNone}
-          >Select none</button>
-          <button
-            className="modal-filter__control-button"
-            onClick={filterHandler}
-          >Done</button>
+        <div className={tmpl.modalControlsCntr}>
+          <button className={tmpl.modalControlBtn} onClick={selectAll}>Select all</button>
+          <button className={tmpl.modalControlBtn} onClick={selectNone}>Select none</button>
+          <button className={tmpl.modalControlBtn} onClick={filterHandler}>Done</button>
         </div>
       </div>
 
@@ -389,7 +231,7 @@ const Bem = () => {
                     className={`chili-db__list-item
                     ${ activeListItem === i ? "chili-db__list-item--active" : "" }`}
                     onClick={listHandler}
-                  >{highlightText(e.name, searchString)}</div>)}
+                  >{highlightText(e.name, searchString, tmpl.hlText)}</div>)}
               </div>}
             </div>
             {list.length > 0 && <div className="chili-db__preview-column">
@@ -520,9 +362,11 @@ const Bem = () => {
   border-bottom: 0.125rem solid #000;
   border-top-right-radius: 1rem;
   background-color: #999;
+  user-select: none;
   &:hover {
     background-color: #111;
     color: #f7e38f;
+    cursor: pointer;
   }
 }
 
@@ -687,6 +531,7 @@ const Bem = () => {
 .modal-filter__close-button {
   float: right;
   padding: 0 0.25rem;
+  user-select: none;
   &:hover, &:focus {
     color: red;
     text-decoration: none;

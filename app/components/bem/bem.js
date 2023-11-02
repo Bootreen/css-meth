@@ -2,7 +2,13 @@ import './bem.css';
 import Image from 'next/image';
 import { useDbStore, useStoreActions } from '../store/store';
 import { imagePrefix } from '../chiliesdb/chiliesdb';
-import { highlightText, renderCheckboxes, renderDropDown, renderTags } from '../utils/renders';
+import {
+  renderCheckboxes,
+  renderDropDown,
+  renderTags,
+  renderMenuTabs,
+  renderList,
+} from '../utils/renders';
 import * as tmpl from './class-names';
 
 const Bem = () => {
@@ -148,90 +154,79 @@ const Bem = () => {
         </div>
       </div>
 
-      <h1 className="document-title">CSS Methodologies</h1>
-      <div className="section-container">
-        <div className="carousel">
-          <div className="carousel__button-container">
+      <h1 className={tmpl.docTitle}>CSS Methodologies</h1>
+      <div className={tmpl.section}>
+        <div className={tmpl.carousel}>
+          <div className={tmpl.carouselBtnCnt}>
             <button
-              id="prev"
-              className={`carousel__button${firstSection() ? " carousel__button--disabled" : ""}`}
+              id='prev'
+              className={tmpl.carouselBtn(firstSection())}
               onClick={sectionHandler}
             >◄ previous</button>
           </div>
-          <h2 className="section-container__header section-container__header--main">BEM (Block - Element - Modifier)</h2>
-          <div className="carousel__button-container">
+          <h2 className={tmpl.sectionHdrMain}>BEM (Block - Element - Modifier)</h2>
+          <div className={tmpl.carouselBtnCnt}>
             <button
-              id="next"
-              className={`carousel__button${lastSection() ? " carousel__button--disabled" : ""}`}
+              id='next'
+              className={tmpl.carouselBtn(lastSection())}
               onClick={sectionHandler}
             >next ►</button>
           </div>
         </div>
-        <h3 className="section-container__header">In a nutshell</h3>
-        <p className="section-container__paragraph">Устаревшее говно мамонта, изобретенное в Яндексе еще в 2005. Подкупает своей простотой. Практически нигде, кроме постсовка, не используется.</p>
-        <p className="section-container__paragraph">Согласно BEM весь layout можно разбить на функционально обособленные блоки. Примеры блоков: меню, статья, сайдбар, поле поиска. Блоки, в свою очередь, состоят из элементов (элемент меню, заголовок, абзац). Для блоков и для элементов при необходимости можно создать дополнительные классы-модификаторы, которые меняют их дефолтные свойства (active, selected, disabled и т.п.).</p>
-        <p className="section-container__paragraph">Вложенная структура блоков игнорируется, с точки зрения BEM все блоки принадлежат к одному глобальному уровню.</p>
-        <p className="section-container__paragraph">BEM запрещает назначать стили через ID и CSS tag (a, p, h1, div и т.п.), в качестве селекторов всегда должны использоваться только классы.</p>
-        <h3 className="section-container__header section-container__header--pros">Pros</h3>
-        <p className="section-container__paragraph section-container__paragraph--pros">Хоть какой-то системный подход для организации CSS в противовес полной анархии. Очень простой naming convention.</p>
+        <h3 className={tmpl.sectionHdr}>In a nutshell</h3>
+        <p className={tmpl.sectionPar}>Устаревшее говно мамонта, изобретенное в Яндексе еще в 2005. Подкупает своей простотой. Практически нигде, кроме постсовка, не используется.</p>
+        <p className={tmpl.sectionPar}>Согласно BEM весь layout можно разбить на функционально обособленные блоки. Примеры блоков: меню, статья, сайдбар, поле поиска. Блоки, в свою очередь, состоят из элементов (элемент меню, заголовок, абзац). Для блоков и для элементов при необходимости можно создать дополнительные классы-модификаторы, которые меняют их дефолтные свойства (active, selected, disabled и т.п.).</p>
+        <p className={tmpl.sectionPar}>Вложенная структура блоков игнорируется, с точки зрения BEM все блоки принадлежат к одному глобальному уровню.</p>
+        <p className={tmpl.sectionPar}>BEM запрещает назначать стили через ID и CSS tag (a, p, h1, div и т.п.), в качестве селекторов всегда должны использоваться только классы.</p>
+        <h3 className={tmpl.sectionHdrPros}>Pros</h3>
+        <p className={tmpl.sectionParPros}>Хоть какой-то системный подход для организации CSS в противовес полной анархии. Очень простой naming convention.</p>
         <code>
           {`.site-search { width: 60px; height: 20px }    /* Block */
 .site-search--inactive { display: none }      /* Block Modifier */
 .site-search__field { color: #222 }           /* Element */
 .site-search__field--focused { color: #666 }  /* Element Modifier */`}
         </code>
-        <h3 className="section-container__header section-container__header--cons">Cons</h3>
-        <p className="section-container__paragraph section-container__paragraph--cons">Совершенно не гибкая система, продуцирующая длинные нечитаемые имена классов и неоправданно раздутые CSS- и HTML-файлы.</p>
-        <p className="section-container__paragraph section-container__paragraph--cons">Названия классов-модификаторов наследуют имена родительских классов блока или элемента, что мешает использовать принципы каскадности и наследуемости в CSS. Например:</p>
+        <h3 className={tmpl.sectionHdrCons}>Cons</h3>
+        <p className={tmpl.sectionParCons}>Совершенно не гибкая система, продуцирующая длинные нечитаемые имена классов и неоправданно раздутые CSS- и HTML-файлы.</p>
+        <p className={tmpl.sectionParCons}>Названия классов-модификаторов наследуют имена родительских классов блока или элемента, что мешает использовать принципы каскадности и наследуемости в CSS. Например:</p>
         <code>{`.article__heading--red { color: red; }`}</code>
         <code>{`<h1 class="article__heading article__heading--red">Title</h1>`}</code>
-        <p className="section-container__paragraph section-container__paragraph--cons">Этот класс можно применить только к заголовку первого уровня внутри блока article. Если нам понадобится красный акцент заголовка в любом другом блоке, согласно BEM для него нужно будет создавать отдельный класс. Необходимо 10 однотипных стилизаций для разных элементов? Создавай 10 отдельных классов. В большинстве других методологий для подобных модификаций создается один глобальный класс, который можно применять ко всем подходящим элементам:</p>
+        <p className={tmpl.sectionParCons}>Этот класс можно применить только к заголовку первого уровня внутри блока article. Если нам понадобится красный акцент заголовка в любом другом блоке, согласно BEM для него нужно будет создавать отдельный класс. Необходимо 10 однотипных стилизаций для разных элементов? Создавай 10 отдельных классов. В большинстве других методологий для подобных модификаций создается один глобальный класс, который можно применять ко всем подходящим элементам:</p>
         <code>{`.text-red { color: red; }`}</code>
         <code>
           {`<h1 class="article_heading text-red">Title</h1>
 <h2 class="article_subheading text-red">Another title</h2>
 <p class="paragraph_main text-red">Lorem ipsum dolor sit amet</p>`}
         </code>
-        <p className="section-container__paragraph section-container__paragraph--cons">В отличие от других методологий, структура HTML-блоков и элементов (размеры, выравнивание, поля и отступы) не сепарируется от оформления (цвета, толщина линий, тени и прочие стилистические свистелки и перделки). Все свалено в одну кучу в одном классе.</p>
+        <p className={tmpl.sectionParCons}>В отличие от других методологий, структура HTML-блоков и элементов (размеры, выравнивание, поля и отступы) не сепарируется от оформления (цвета, толщина линий, тени и прочие стилистические свистелки и перделки). Все свалено в одну кучу в одном классе.</p>
 
-        <div className="chili-db">
-          <div className="chili-db__header">
-            <h2 className="chili-db__title">Chili database</h2>
+        {/* sample database interface */}
+        <div className={tmpl.db}>
+          <div className={tmpl.dbHdr}>
+            <h2 className={tmpl.dbTitle}>Sample database: Chilies</h2>
           </div>
-          <div className="chili-db__menu">
-            {tabs.map((e, i) =>
-              <h5
-                key={`${i}-${e}`}
-                className={`chili-db__menu-item chili-db__menu-item--${i + 1}
-                ${ activeTab === i ? " chili-db__menu-item--active" : "" }`}
-                onClick={menuHandler}
-              >{e[0].toLocaleUpperCase() + e.slice(1)}</h5>)}
-            <div className="chili-db__menu-item--placeholder"></div>
+          <div className={tmpl.dbMenu}>
+            {renderMenuTabs(tabs, menuHandler, activeTab, [tmpl.dbMenuItem, tmpl.dbMenuItemActive])}
+            <div className={tmpl.dbMenuItemPhld}></div>
           </div>
-          <div className="chili-db__browser">
-            <div className="chili-db__list-search-container">
+          <div className={tmpl.dbBrowser}>
+            <div className={tmpl.dbSearchCnt}>
               <button
-                className="chili-db__list-filter"
+                className={tmpl.dbFilterBtn}
                 onClick={filterHandler}
               >Filter</button>
               <input
-                id="search"
-                type="search"
-                placeholder="Quick search"
+                id='search'
+                type='search'
+                placeholder='Quick search'
                 onChange={searchHandler}
-                className="chili-db__list-search-field"
+                className={tmpl.dbSearchField}
               ></input>
             </div>
-            <div className="chili-db__list-container">
-              {list.length > 0 && <div className="chili-db__list-column">
-                {list.map((e, i) =>
-                  <div
-                    id={i}
-                    key={`${i}-${e.name}`}
-                    className={`chili-db__list-item
-                    ${ activeListItem === i ? "chili-db__list-item--active" : "" }`}
-                    onClick={listHandler}
-                  >{highlightText(e.name, searchString, tmpl.hlText)}</div>)}
+            <div className={tmpl.dbListCnt}>
+              {list.length > 0 && <div className={tmpl.dbListCol}>
+                {renderList(list, listHandler, activeListItem, searchString,
+                  [tmpl.dbListItem, tmpl.dbListItemActive, tmpl.hlText])}
               </div>}
             </div>
             {list.length > 0 && <div className="chili-db__preview-column">
@@ -240,38 +235,38 @@ const Bem = () => {
                 <Image
                   className="chili-db__preview-img"
                   fill={true}
-                  sizes="(max-width: 500px) 100vw"
+                  sizes='(max-width: 500px) 100vw'
                   priority={true}
                   src={imagePrefix + list[activeListItem].image}
                   alt={list[activeListItem].name}
                 />
               </div>
-              <ul className="chili-db__preview-specs">
-                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--species">
-                  <span className="chili-db__preview-specs-item--strong">C. {list[activeListItem].species}</span>
+              <ul className={tmpl.dbPrvSpecs}>
+                <li className={tmpl.dbPrvSpecsItem}>
+                  <span className={tmpl.dbPrvSpecsItemStrong}>C. {list[activeListItem].species}</span>
                 </li>
-                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--plant-size">
-                  Plant: <span className="chili-db__preview-specs-item--strong">{list[activeListItem].plantSize}</span>
+                <li className={tmpl.dbPrvSpecsItem}>
+                  Plant: <span className={tmpl.dbPrvSpecsItemStrong}>{list[activeListItem].plantSize}</span>
                 </li>
-                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--fruit-size">
-                  Fruit: <span className="chili-db__preview-specs-item--strong">{list[activeListItem].fruitSize}</span>
+                <li className={tmpl.dbPrvSpecsItem}>
+                  Fruit: <span className={tmpl.dbPrvSpecsItemStrong}>{list[activeListItem].fruitSize}</span>
                 </li>
-                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--spiciness">
-                  Spiciness: <span className="chili-db__preview-specs-item--strong">{list[activeListItem].heatLevel}</span>
+                <li className={tmpl.dbPrvSpecsItem}>
+                  Spiciness: <span className={tmpl.dbPrvSpecsItemStrong}>{list[activeListItem].heatLevel}</span>
                 </li>
-                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--shape">
-                  Shape: <span className="chili-db__preview-specs-item--strong">{list[activeListItem].fruitShape}</span>
+                <li className={tmpl.dbPrvSpecsItem}>
+                  Shape: <span className={tmpl.dbPrvSpecsItemStrong}>{list[activeListItem].fruitShape}</span>
                 </li>
-                <li className="chili-db__preview-specs-item chili-db__preview-specs-item--color">
-                  Color: <span className="chili-db__preview-specs-item--strong">{list[activeListItem].fruitColor}</span>
+                <li className={tmpl.dbPrvSpecsItem}>
+                  Color: <span className={tmpl.dbPrvSpecsItemStrong}>{list[activeListItem].fruitColor}</span>
                 </li>
               </ul>
-              <p className="chili-db__preview-description">{list[activeListItem].description}</p>
+              <p className={tmpl.dbPrvDesc}>{list[activeListItem].description}</p>
             </div>}
           </div>
         </div>
 
-        <h3 className="section-container__header">Пример стилизации текущего документа по BEM:</h3>
+        <h3 className={tmpl.sectionHdr}>Пример стилизации текущего документа по BEM:</h3>
         <code>
           {`.document-title {
   text-align: center;

@@ -1,7 +1,7 @@
 import { keyA, keyB } from './keygen';
 import { Fragment } from 'react';
 
-export const highlightText = (text, highlight, style) => {
+const highlightText = (text, highlight, style) => {
   const chunks = text.split(new RegExp(`(${highlight})`, 'gi'));
   return (
     <Fragment>
@@ -61,4 +61,27 @@ export const renderTags = (array, handler, label, styles) => array.map((e, i) =>
         {slice}<span className={styleRemoveBtn}>&times;</span>
       </div> : <Fragment key={keyB(label, i, slice)}></Fragment>
   )
-})
+});
+
+export const renderMenuTabs = (array, handler, param, styles) => array.map((e, i) => {
+  const [dbMenuItem, dbMenuItemActive] = styles;
+  return (
+    <h5
+      key={keyA(e, i)}
+      className={`${dbMenuItem} ${dbMenuItem}-${i + 1} ${ param === i ? dbMenuItemActive : '' }`}
+      onClick={handler}
+    >{e[0].toLocaleUpperCase() + e.slice(1)}</h5>
+  )
+});
+
+export const renderList = (array, handler, param, searchString, styles) => array.map((e, i) => {
+  const [dbListItem, dbListItemActive, hlText] = styles;
+  return (
+    <div
+      id={i}
+      key={keyA(e, i)}
+      className={`${dbListItem} ${ param === i ? dbListItemActive : '' }`}
+      onClick={handler}
+    >{highlightText(e.name, searchString, hlText)}</div>
+  )
+});

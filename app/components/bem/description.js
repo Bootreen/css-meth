@@ -31,7 +31,7 @@ const Description = ({ desc, handler }) => {
           </div>
         </div>
       );
-      if (e.includes('[header]')) return DescHdr(e, keyA('hdr', i), tmpl.sectionHdr);
+      if (e.includes('[header]')) return DescHdr(e.replaceAll('[header]', ''), keyA('hdr', i), tmpl.sectionHdr);
       if (e.includes('--CODE')) return DescCode(e, keyA('code', i));
       return DescText(e, keyA('txt', i),
         type === 'pros' ? tmpl.sectionParPros : type === 'cons' ? tmpl.sectionParCons : tmpl.sectionPar)

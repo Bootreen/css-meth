@@ -9,10 +9,12 @@ import path from 'path';
 export default async function Home() {
   // const currentSection = useDbStore(state => state.section);
 
+  let cssSample = [];
+  let desc = [];
   const descPath = path.join(process.cwd(), '/app/components/bem/bem.dsc');
   const cssPath = path.join(process.cwd(), '/app/components/bem/bem.css');
-  const cssSample = await fsPromises.readFile(cssPath, 'utf8');
-  const desc = await fsPromises.readFile(descPath, 'utf8');
+  cssSample = await fsPromises.readFile(cssPath, 'utf8');
+  desc = await fsPromises.readFile(descPath, 'utf8');
 
   return <Bem cssSample={cssSample} desc={desc}/>
 

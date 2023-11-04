@@ -6,17 +6,18 @@ import Oocss from './components/oocss/oocss';
 import fsPromises from 'fs/promises';
 import path from 'path';
 
-export default async function Home() {
-  // const currentSection = useDbStore(state => state.section);
-
-  let cssSample = [];
-  let desc = [];
+export const getStaticProps = async () => {
   const descPath = path.join(process.cwd(), '/app/components/bem/bem.dsc');
   const cssPath = path.join(process.cwd(), '/app/components/bem/bem.css');
-  cssSample = await fsPromises.readFile(cssPath, 'utf8');
-  desc = await fsPromises.readFile(descPath, 'utf8');
+  const descFile = await fsPromises.readFile(descPath, 'utf8');
+  const cssFile = await fsPromises.readFile(cssPath, 'utf8');
+  return { props: { desc: descFile, cssSample: cssFile }}
+}
 
-  return <Bem cssSample={cssSample} desc={desc}/>
+export default async function Home({ desc, cssSample }) {
+  // const currentSection = useDbStore(state => state.section);
+
+  return <Bem desc={desc} cssSample={cssSample} />
 
   // switch (currentSection) {
   //   case 0: return <Bem/>

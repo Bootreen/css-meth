@@ -1,21 +1,14 @@
 import './styles/common.css';
 import './styles/hljs.css';
-import { useDbStore } from './components/store/store';
+// import { useDbStore } from './components/store/store';
+// import Oocss from './components/oocss/oocss';
 import Bem from './components/bem/bem';
-import Oocss from './components/oocss/oocss';
-import fsPromises from 'fs/promises';
-import path from 'path';
+import getData from './components/utils/fetch-data';
 
-export const getStaticProps = async () => {
-  const descPath = path.join(process.cwd(), '/app/components/bem/bem.dsc');
-  const cssPath = path.join(process.cwd(), '/app/components/bem/bem.css');
-  const descFile = await fsPromises.readFile(descPath, 'utf8');
-  const cssFile = await fsPromises.readFile(cssPath, 'utf8');
-  return { props: { desc: descFile, cssSample: cssFile }}
-}
-
-export default async function Home({ desc, cssSample }) {
+export default async function Home() {
   // const currentSection = useDbStore(state => state.section);
+
+  const { desc, cssSample } = await getData();
 
   return <Bem desc={desc} cssSample={cssSample} />
 

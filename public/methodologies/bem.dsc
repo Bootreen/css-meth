@@ -1,11 +1,11 @@
 [title]BEM (Block - Element - Modifier)
 [header]In a nutshell
-Устаревшее говно мамонта, изобретенное в Яндексе еще в 2005. Подкупает своей простотой. Практически нигде, кроме постсовка, не используется.
-Согласно BEM весь layout можно разбить на функционально обособленные блоки. Примеры блоков: меню, статья, сайдбар, поле поиска. Блоки, в свою очередь, состоят из элементов (элемент меню, заголовок, абзац). Для блоков и для элементов при необходимости можно создать дополнительные классы-модификаторы, которые меняют их дефолтные свойства (active, selected, disabled и т.п.).
-Вложенная структура блоков игнорируется, с точки зрения BEM все блоки принадлежат к одному глобальному уровню.
-BEM запрещает назначать стили через ID и CSS tag (a, p, h1, div и т.п.), в качестве селекторов всегда должны использоваться только классы.
+Outdated mammoth crap, invented by Yandex back in 2005. It captivates with its simplicity. Hardly used anywhere except in the post-Soviet space.
+According to BEM, the entire layout can be divided into functionally isolated blocks. For examples: menu, article, sidebar, and search field. Blocks, in turn, consist of elements (menu item, header, paragraph). For both blocks and elements, additional modifier classes can be created as needed, which change their default properties (e.g., active, selected, disabled, and so on).
+Nested block structures are ignored; from the perspective of BEM, all blocks belong to the same global level.
+BEM prohibits applying styles through IDs and CSS tags (such as a, p, h1, div, and the like); only classes should be used as selectors.
 [pros]
-Хоть какой-то системный подход для организации CSS в противовес полной анархии. Очень простой naming convention.
+It offers at least some systematic approach to organizing CSS in contrast to complete anarchy. Provides a very simple naming convention.
 [code]
 .site-search { width: 60px; height: 20px }    /* Block */
 .site-search--inactive { display: none }      /* Block Modifier */
@@ -13,15 +13,14 @@ BEM запрещает назначать стили через ID и CSS tag (a
 .site-search__field--focused { color: #666 }  /* Element Modifier */
 [/code]
 [cons]
-Совершенно не гибкая система, продуцирующая длинные нечитаемые имена классов и неоправданно раздутые CSS- и HTML-файлы.
-Названия классов-модификаторов наследуют имена родительских классов блока или элемента, что мешает использовать принципы каскадности и наследуемости в CSS. Например:
+It's a highly inflexible system that produces long and unreadable class names, resulting in unnecessarily bloated CSS and HTML files. The names of modifier classes inherit the names of parent block or element classes, which hinders the use of the principles of specificity and inheritance in CSS. For example:
 [code]
 .article__heading--red { color: red; }
 [/code]
 [code]
 <h1 class="article__heading article__heading--red">Title</h1>
 [/code]
-Этот класс можно применить только к заголовку первого уровня внутри блока article. Если нам понадобится красный акцент заголовка в любом другом блоке, согласно BEM для него нужно будет создавать отдельный класс. Необходимо 10 однотипных стилизаций для разных элементов? Создавай 10 отдельных классов. В большинстве других методологий для подобных модификаций создается один глобальный класс, который можно применять ко всем подходящим элементам:
+This class can only be applied to the first-level heading within the "article" block. If we need a red accent for the heading in any other block, according to BEM, a separate class would need to be created for it. Do you require 10 similar stylizations for different elements? Create 10 separate classes. In most other methodologies, a single global class is created for such modifications, which can be applied to all suitable elements:
 [code]
 .text-red { color: red; }
 [/code]
@@ -30,7 +29,7 @@ BEM запрещает назначать стили через ID и CSS tag (a
 <h2 class="article_subheading text-red">Another title</h2>
 <p class="paragraph_main text-red">Lorem ipsum dolor sit amet>
 [/code]
-В отличие от других методологий, структура HTML-блоков и элементов (размеры, выравнивание, поля и отступы) не сепарируется от оформления (цвета, толщина линий, тени и прочие стилистические свистелки и перделки). Все свалено в одну кучу в одном классе.
+Unlike other methodologies, the structure of HTML blocks and elements (sizes, alignment, padding, and margins) is not separated from the styling (colors, line thickness, shadows, and other stylistic embellishments). Everything is lumped together in a single class.
 [example]
 [code]
 .document-title {
@@ -222,6 +221,9 @@ BEM запрещает назначать стили через ID и CSS tag (a
 .chili-db__list-item {
   color: #222;
   padding: 0.125rem;
+  &:hover {
+    cursor: default;
+  }
 }
 
 .chili-db__list-item--active {

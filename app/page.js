@@ -1,17 +1,8 @@
 import './styles/common.css';
 import './styles/hljs.css';
-// import { useDbStore } from './components/store/store';
-// import Oocss from './components/oocss/oocss';
-import Bem from './components/bem/bem';
-import getData from './components/utils/fetch-data'
+import getData from './components/utils/fetch-data';
+import { Section } from './components/section/section';
 
-export default async function Home() {
-  // const currentSection = useDbStore(state => state.section);
+const Home = async () => <Section description={await getData()} />;
 
-  return <Bem desc={await getData()} />
-
-  // switch (currentSection) {
-  //   case 0: return <Bem/>
-  //   case 1: return <Oocss/>
-  // }
-}
+export default Home;

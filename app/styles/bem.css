@@ -187,6 +187,9 @@
 .chili-db__list-item {
   color: #222;
   padding: 0.125rem;
+  &:hover {
+    cursor: default;
+  }
 }
 
 .chili-db__list-item--active {

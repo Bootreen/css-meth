@@ -16,15 +16,15 @@ export const SectionChunk = ({chunk, type, tmpl, first, last, handler}) => {
         <div className={tmpl.carouselBtnCont}>
           <button
             id='prev'
-            className={tmpl.carouselBtn(first)}
+            className={first ? tmpl.carouselBtnDis : tmpl.carouselBtn}
             onClick={handler}
-          >◄ previous</button>
+          >◄ prev</button>
         </div>
         <h2 className={tmpl.sectionHdrMain}>{e.replaceAll('[title]', '')}</h2>
         <div className={tmpl.carouselBtnCont}>
           <button
             id='next'
-            className={tmpl.carouselBtn(last)}
+            className={last ? tmpl.carouselBtnDis : tmpl.carouselBtn}
             onClick={handler}
           >next ►</button>
         </div>

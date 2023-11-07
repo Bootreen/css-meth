@@ -1,5 +1,5 @@
 import { useDbStore, useStoreActions } from '../store/store';
-import { CheckboxesGroup } from '../checkboxes-group/checkboxes-group';
+import { CheckboxGroup } from '../checkbox-group/checkbox-group';
 import { DropDown } from '../dropdown/dropdown';
 import { TagSet } from '../tag-set/tag-set';
 
@@ -40,14 +40,14 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
   const selectNone = () => selectAllFilters(false);
 
   return (
-    <div className={tmpl.modalWnd(isModalVisible)}>
+    <div className={isModalVisible ? tmpl.modalWnd : tmpl.modalWnd}>
       <h4 className={tmpl.modalHdr}>
         Filters<span className={tmpl.modalCloseBtn} onClick={modalHandler}>&times;</span>
       </h4>
       <div className={tmpl.modalColumnsCont}>
         <div className={tmpl.modalColumn}>
           <h5 className={tmpl.modalSubHdr}>Spiciness</h5>
-          <CheckboxesGroup
+          <CheckboxGroup
             array={spiciness}
             handler={spicinessFilter}
             label='spiciness'
@@ -56,7 +56,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
         </div>
         <div className={tmpl.modalColumn}>
           <h5 className={tmpl.modalSubHdr}>Plant size</h5>
-          <CheckboxesGroup
+          <CheckboxGroup
             array={plantSizes}
             handler={plantSizeFilter}
             label='spiciness'
@@ -65,7 +65,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
         </div>
         <div className={tmpl.modalColumn}>
           <h5 className={tmpl.modalSubHdr}>Fruit size</h5>
-          <CheckboxesGroup
+          <CheckboxGroup
             array={fruitSizes}
             handler={fruitSizeFilter}
             label='spiciness'

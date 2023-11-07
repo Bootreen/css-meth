@@ -1,6 +1,6 @@
 import { keyA, keyB } from '../utils/keygen';
 
-export const CheckboxesGroup = ({array, handler, label, tmpl}) => array.map((e, i) => {
+export const CheckboxGroup = ({array, handler, label, tmpl}) => array.map((e, i) => {
   const slice = Object.keys(e)[0];
   const { [slice]: checked } = array.filter(e => Object.hasOwn(e, slice))[0];
   return (

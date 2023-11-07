@@ -1,12 +1,11 @@
-"use client";
+'use client'
 
 import '@/app/styles/bem.css';
 import '@/app/styles/oocss.css';
-import { classNames } from '@/app/styles/class-names';
 import { useEffect } from 'react';
 import { useDbStore, useStoreActions } from '../store/store';
-import { SectionChunk } from '../section-chunk/section-chunk';
 import { descParse } from '../utils/desc-parser';
+import { SectionChunk } from '../section-chunk/section-chunk';
 import { DatabaseBrowser } from '../database-browser/db-browser';
 import { FilterModalWindow } from '../filter-modal-window/filter-modal';
 
@@ -14,14 +13,9 @@ import hljs from 'highlight.js';
 
 hljs.configure({ cssSelector: 'code', languages: ['html', 'css'] });
 
-export const Section = ({ description }) => {
+export const Section = ({ description, templates }) => {
 
-  // Highlight code insertions inside current section
-  useEffect(() => hljs.highlightAll(), [description]);
-
-  const tmpl = classNames.bem;
-
-  const [main, pros, cons, example] = descParse(description);
+  const section = useDbStore(state => state.section);
 
   const {
     firstSection,
@@ -29,6 +23,13 @@ export const Section = ({ description }) => {
     changeSection,
     toogleModalFilter,
   } = useStoreActions();
+
+  // Highlight code insertions inside current section
+  useEffect(() => hljs.highlightAll(), [section]);
+
+  const tmpl = templates[section];
+
+  const [main, pros, cons, example] = descParse(description[section]);
 
   const sectionHandler = event => changeSection(event.target.id);
   const filterHandler = () => toogleModalFilter();

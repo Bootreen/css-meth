@@ -41,7 +41,7 @@ const Description = ({ desc, handler }) => {
     return payload;
   }
 
-  let splitted = desc.split(/\[pros\]\r\n|\[cons\]\r\n/g)
+  let splitted = desc.split(/\[pros\]\r\n|\[cons\]\r\n|\[example\]/g)
     // preformat code insertion markers
     .map(e => e.replaceAll('[code]', '[code]--CODE'))
     // further split to plain text and code insertions
@@ -57,13 +57,14 @@ const Description = ({ desc, handler }) => {
     });
     splitted[index] = splitted[index].flat();
   });
-  const [main, pros, cons] = splitted;
+  const [main, pros, cons, example] = splitted;
 
   return (
     <Fragment>
       {renderSection(main, 'main')}
       {renderSection(pros, 'pros')}
       {renderSection(cons, 'cons')}
+      {renderSection(example)}
     </Fragment>
   )
 };

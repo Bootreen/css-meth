@@ -1,4 +1,4 @@
-export const imgPref = "/";
+export const imgPref = '/images/';
 export const chilies = [
   {
     name: 'Agnetto Gold Thick',

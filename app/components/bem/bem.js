@@ -18,10 +18,9 @@ import hljs from 'highlight.js';
 
 hljs.configure({ cssSelector: 'code', languages: ['html', 'css'] });
 
-const Bem = ({ cssSample, desc }) => {
-
+const Bem = ({ desc }) => {
   // Highlight code insertion inside current section
-  useEffect(() => hljs.highlightAll(), [cssSample]);
+  useEffect(() => hljs.highlightAll(), [desc]);
 
   const {
     firstSection,
@@ -236,10 +235,6 @@ const Bem = ({ cssSample, desc }) => {
           </div>
         </div>
 
-        <h3 className={tmpl.sectionHdr}>Пример стилизации в данной методологии:</h3>
-        <code>
-          {`${cssSample}`}
-        </code>
       </div>
     </main>
   )

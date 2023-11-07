@@ -9,7 +9,7 @@ const Description = ({ desc, handler }) => {
 
   const DescHdr = (payload, key, style) => <h3 key={key} className={style}>{payload}</h3>;
   const DescText = (payload, key, style) => <p key={key} className={style}>{payload}</p>;
-  const DescCode = (payload, key) => <code key={key}>{`${payload.replaceAll('--CODE\r\n', '')}`}</code>;
+  const DescCode = (payload, key) => <code key={key}>{`${payload.replaceAll('--CODE\n', '')}`}</code>;
   const renderSection = (section, type) => {
     const payload = section.map((e, i) => {
       if (e.includes('[title]')) return (
@@ -38,33 +38,37 @@ const Description = ({ desc, handler }) => {
     });
     if (type === 'pros') payload.unshift(DescHdr('Pros', keyA('hdr', 'p'), tmpl.sectionHdrPros));
     if (type === 'cons') payload.unshift(DescHdr('Cons', keyA('hdr', 'c'), tmpl.sectionHdrCons));
+    if (type === 'example')
+      payload.unshift(DescHdr('Пример стилизации по данной методологии', keyA('hdr', 'c'), tmpl.sectionHdr));
     return payload;
   }
 
-  let splitted = desc.split(/\[pros\]\r\n|\[cons\]\r\n|\[example\]/g)
+  let splitted = desc.split(/\[pros\]\n|\[cons\]\n|\[example\]\n/g)
     // preformat code insertion markers
     .map(e => e.replaceAll('[code]', '[code]--CODE'))
     // further split to plain text and code insertions
-    .map(e => e.split(/\[code\]|\[\/code\]\r\n|\[\/code\]/g));
+    .map(e => e.split(/\[code\]|\[\/code\]\n|\[\/code\]/g));
   // split multistrings and remove empty strings
   splitted.forEach((part, index) => {
     part.forEach((e, i) => {
       if (!e.includes('--CODE')) {
-        part[i] = e.split(/\r\n/g);
+        part[i] = e.split(/\n/g);
         part[i].forEach((f, j) => {if (f === '') part[i].splice(j, 1)});
       };
       if (e === '') part.splice(i, 1);
     });
     splitted[index] = splitted[index].flat();
   });
+
   const [main, pros, cons, example] = splitted;
+  console.log(splitted)
 
   return (
     <Fragment>
       {renderSection(main, 'main')}
       {renderSection(pros, 'pros')}
       {renderSection(cons, 'cons')}
-      {renderSection(example)}
+      {renderSection(example, 'example')}
     </Fragment>
   )
 };

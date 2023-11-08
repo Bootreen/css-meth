@@ -43,7 +43,7 @@ export const classNames = [
     hlText: 'chili-db__list-item--highlighted',
     // modal window styles
     modalWnd: 'modal-filter',
-    modalWndVis: 'modal-filter--visible',
+    modalWndVis: 'modal-filter modal-filter--visible',
     modalHdr: 'modal-filter__header',
     modalCloseBtn: 'modal-filter__close-button',
     modalColumnsCont: 'modal-filter__columns-container',
@@ -102,7 +102,7 @@ export const classNames = [
     hlText: 'chili-db__list-item--highlighted',
     // modal window styles
     modalWnd: 'modal-filter',
-    modalWndVis: 'modal-filter--visible',
+    modalWndVis: 'modal-filter modal-filter--visible',
     modalHdr: 'modal-filter__header',
     modalCloseBtn: 'modal-filter__close-button',
     modalColumnsCont: 'modal-filter__columns-container',

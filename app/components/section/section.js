@@ -38,6 +38,7 @@ export const Section = ({ description, templates }) => {
     <main>
       <h1 className={tmpl.docTitle}>CSS Methodologies</h1>
       <div className={tmpl.section}>
+        <FilterModalWindow modalHandler={filterHandler} tmpl={tmpl} />
         <SectionChunk
           chunk={main}
           type='main'
@@ -50,7 +51,6 @@ export const Section = ({ description, templates }) => {
         <SectionChunk chunk={pros} type='pros' tmpl={tmpl} />
         <SectionChunk chunk={cons} type='cons' tmpl={tmpl} />
         <SectionChunk chunk={example} type='example' tmpl={tmpl} />
-        <FilterModalWindow modalHandler={filterHandler} tmpl={tmpl} />
       </div>
     </main>
   )

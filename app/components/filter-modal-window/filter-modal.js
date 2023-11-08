@@ -40,7 +40,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
   const selectNone = () => selectAllFilters(false);
 
   return (
-    <div className={isModalVisible ? tmpl.modalWnd : tmpl.modalWnd}>
+    <div className={isModalVisible ? tmpl.modalWndVis : tmpl.modalWnd}>
       <h4 className={tmpl.modalHdr}>
         Filters<span className={tmpl.modalCloseBtn} onClick={modalHandler}>&times;</span>
       </h4>

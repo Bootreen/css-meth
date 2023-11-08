@@ -2,24 +2,7 @@
 export const classNames = [
 
   // BEM
-  {
-    hlText: 'chili-db__list-item--highlighted',
-    modalWnd: 'modal-filter',
-    modalWndVis: 'modal-filter--visible',
-    modalHdr: 'modal-filter__header',
-    modalCloseBtn: 'modal-filter__close-button',
-    modalColumnsCont: 'modal-filter__columns-container',
-    modalColumn: 'modal-filter__column',
-    modalSubHdr: 'modal-filter__subheader',
-    modalCheckboxEl: 'modal-filter__checkbox-element',
-    modalCheckbox: 'modal-filter__checkbox',
-    modalLbl: 'modal-filter__label',
-    modalDropDn: 'modal-filter__dropdown',
-    modalTag: 'modal-filter__tag',
-    modalTagRemoveBtn: 'modal-filter__tag-remove-button',
-    modalControlsCont: 'modal-filter__controls-container',
-    modalControlBtn: 'modal-filter__control-button',
-
+  { // main section styles
     docTitle: 'document-title',
     section: 'section-container',
     carousel: 'carousel',
@@ -33,7 +16,7 @@ export const classNames = [
     sectionPar: 'section-container__paragraph',
     sectionParPros: 'section-container__paragraph section-container__paragraph--pros',
     sectionParCons: 'section-container__paragraph section-container__paragraph--cons',
-
+    // db browser styles
     db: 'chili-db',
     dbHdr: 'chili-db__header',
     dbTitle: 'chili-db__title',
@@ -56,29 +39,29 @@ export const classNames = [
     dbPrvSpecs: 'chili-db__preview-specs',
     dbPrvSpecsItem: 'chili-db__preview-specs-item',
     dbPrvSpecsItemStrong: 'chili-db__preview-specs-item--strong',
-    dbPrvDesc: 'chili-db__preview-description'
+    dbPrvDesc: 'chili-db__preview-description',
+    hlText: 'chili-db__list-item--highlighted',
+    // modal window styles
+    modalWnd: 'modal-filter',
+    modalWndVis: 'modal-filter--visible',
+    modalHdr: 'modal-filter__header',
+    modalCloseBtn: 'modal-filter__close-button',
+    modalColumnsCont: 'modal-filter__columns-container',
+    modalColumn: 'modal-filter__column',
+    modalSubHdr: 'modal-filter__subheader',
+    modalCheckboxEl: 'modal-filter__checkbox-element',
+    modalCheckbox: 'modal-filter__checkbox',
+    modalLbl: 'modal-filter__label',
+    modalDropDn: 'modal-filter__dropdown',
+    modalTag: 'modal-filter__tag',
+    modalTagRemoveBtn: 'modal-filter__tag-remove-button',
+    modalControlsCont: 'modal-filter__controls-container',
+    modalControlBtn: 'modal-filter__control-button'
   },
 
   // OOCSS
   // temp placeholder (bem copy)
-  {
-    hlText: 'chili-db__list-item--highlighted',
-    modalWnd: 'modal-filter',
-    modalWndVis: 'modal-filter--visible',
-    modalHdr: 'modal-filter__header',
-    modalCloseBtn: 'modal-filter__close-button',
-    modalColumnsCont: 'modal-filter__columns-container',
-    modalColumn: 'modal-filter__column',
-    modalSubHdr: 'modal-filter__subheader',
-    modalCheckboxEl: 'modal-filter__checkbox-element',
-    modalCheckbox: 'modal-filter__checkbox',
-    modalLbl: 'modal-filter__label',
-    modalDropDn: 'modal-filter__dropdown',
-    modalTag: 'modal-filter__tag',
-    modalTagRemoveBtn: 'modal-filter__tag-remove-button',
-    modalControlsCont: 'modal-filter__controls-container',
-    modalControlBtn: 'modal-filter__control-button',
-
+  {  // main section styles
     docTitle: 'document-title',
     section: 'section-container',
     carousel: 'carousel',
@@ -92,7 +75,7 @@ export const classNames = [
     sectionPar: 'section-container__paragraph',
     sectionParPros: 'section-container__paragraph section-container__paragraph--pros',
     sectionParCons: 'section-container__paragraph section-container__paragraph--cons',
-
+    // db browser styles
     db: 'chili-db',
     dbHdr: 'chili-db__header',
     dbTitle: 'chili-db__title',
@@ -115,7 +98,24 @@ export const classNames = [
     dbPrvSpecs: 'chili-db__preview-specs',
     dbPrvSpecsItem: 'chili-db__preview-specs-item',
     dbPrvSpecsItemStrong: 'chili-db__preview-specs-item--strong',
-    dbPrvDesc: 'chili-db__preview-description'
+    dbPrvDesc: 'chili-db__preview-description',
+    hlText: 'chili-db__list-item--highlighted',
+    // modal window styles
+    modalWnd: 'modal-filter',
+    modalWndVis: 'modal-filter--visible',
+    modalHdr: 'modal-filter__header',
+    modalCloseBtn: 'modal-filter__close-button',
+    modalColumnsCont: 'modal-filter__columns-container',
+    modalColumn: 'modal-filter__column',
+    modalSubHdr: 'modal-filter__subheader',
+    modalCheckboxEl: 'modal-filter__checkbox-element',
+    modalCheckbox: 'modal-filter__checkbox',
+    modalLbl: 'modal-filter__label',
+    modalDropDn: 'modal-filter__dropdown',
+    modalTag: 'modal-filter__tag',
+    modalTagRemoveBtn: 'modal-filter__tag-remove-button',
+    modalControlsCont: 'modal-filter__controls-container',
+    modalControlBtn: 'modal-filter__control-button'
   },
 
 ]

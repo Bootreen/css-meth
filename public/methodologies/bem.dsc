@@ -67,13 +67,9 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   }
 }
 
-.carousel__button--disabled {
-  display: none;
-}
+.carousel__button--disabled { display: none; }
 
-.section-container__header {
-  margin: 1.2rem 0 0 0;
-}
+.section-container__header { margin: 1.2rem 0 0 0; }
 
 .section-container__header--main {
   margin: auto;
@@ -92,17 +88,11 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   color: #ddd;
 }
 
-.section-container__paragraph {
-  margin: 0;
-}
+.section-container__paragraph { margin: 0; }
 
-.section-container__paragraph--pros {
-  background: #e1f7dc;
-}
+.section-container__paragraph--pros { background: #e1f7dc; }
 
-.section-container__paragraph--cons {
-  background: #ffe3e3;
-}
+.section-container__paragraph--cons { background: #ffe3e3; }
 
 .chili-db {
   display: flex;
@@ -153,29 +143,11 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   }
 }
 
-.chili-db__menu-item-1 {
-  padding-left: 0.7rem;
-  z-index: 30;
-}
-
-.chili-db__menu-item-2 {
-  z-index: 29;
-}
-
-.chili-db__menu-item-3 {
-  z-index: 28;
-}
-
-.chili-db__menu-item-4 {
-  z-index: 27;
-}
-
-.chili-db__menu-item-5 {
-  z-index: 26;
-}
-
-.chili-db__menu-item-6 {
-  z-index: 25;
+@for $i from 1 through 6 {
+  .chili-db__menu-item-#{$i} {
+    z-index: 31 - $i;
+    @if $i == 1 {padding-left: 0.7rem};
+  }
 }
 
 .chili-db__browser {
@@ -264,9 +236,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   position: relative;
 }
 
-.chili-db__preview-img {
-  border-radius: 1rem;
-}
+.chili-db__preview-img { border-radius: 1rem; }
 
 .chili-db__preview-specs {
   grid-area: specs;
@@ -274,13 +244,9 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   margin: 0.5rem 0 0 1.6rem;
 }
 
-.chili-db__preview-specs-item {
-  font-size: 1rem;
-}
+.chili-db__preview-specs-item { font-size: 1rem; }
 
-.chili-db__preview-specs-item--strong {
-  font-weight: 600;
-}
+.chili-db__preview-specs-item--strong { font-weight: 600; }
 
 .chili-db__preview-description {
   grid-area: description;
@@ -298,9 +264,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   border: 0.25rem outset;
 }
 
-.modal-filter--visible {
-  display: block;
-}
+.modal-filter--visible { display: block; }
 
 .modal-filter__header {
   font-size: 1.4rem;

@@ -1,7 +1,7 @@
 'use client'
 
-import '@/app/styles/bem.css';
-import '@/app/styles/oocss.css';
+import '@/app/styles/bem.scss';
+import '@/app/styles/oocss.scss';
 import { useEffect } from 'react';
 import { useDbStore, useStoreActions } from '../store/store';
 import { descParse } from '../utils/desc-parser';
@@ -11,7 +11,7 @@ import { FilterModalWindow } from '../filter-modal-window/filter-modal';
 
 import hljs from 'highlight.js';
 
-hljs.configure({ cssSelector: 'code', languages: ['html', 'css'] });
+hljs.configure({ cssSelector: 'code', languages: ['html', 'css', 'scss'] });
 
 export const Section = ({ description, templates }) => {
 

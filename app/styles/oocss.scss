@@ -1,107 +1,81 @@
-[title]BEM (Block - Element - Modifier)
-[header]In a nutshell
-Outdated mammoth crap, invented by Yandex back in 2005. It captivates with its simplicity. Hardly used anywhere except in the post-Soviet space.
-According to BEM, the entire layout can be divided into functionally isolated blocks. For examples: menu, article, sidebar, and search field. Blocks, in turn, consist of elements (menu item, header, paragraph). For both blocks and elements, additional modifier classes can be created as needed, which change their default properties (e.g., active, selected, disabled, and so on).
-Nested block structures are ignored; from the perspective of BEM, all blocks belong to the same global level.
-BEM prohibits applying styles through IDs and CSS tags (such as a, p, h1, div, and the like); only classes should be used as selectors.
-[pros]
-It offers at least some systematic approach to organizing CSS in contrast to complete anarchy. Provides a very simple naming convention.
-[code]
-.site-search { width: 60px; height: 20px }    /* Block */
-.site-search--inactive { display: none }      /* Block Modifier */
-.site-search__field { color: #222 }           /* Element */
-.site-search__field--focused { color: #666 }  /* Element Modifier */
-[/code]
-[cons]
-It's a highly inflexible system that produces long and unreadable class names, resulting in unnecessarily bloated CSS and HTML files. The names of modifier classes inherit the names of parent block or element classes, which hinders the use of the principles of specificity and inheritance in CSS. For example:
-[code]
-.article__heading--red { color: red; }
-[/code]
-[code]
-<h1 class="article__heading article__heading--red">Title</h1>
-[/code]
-This class can only be applied to the first-level heading within the "article" block. If we need a red accent for the heading in any other block, according to BEM, a separate class would need to be created for it. Do you require 10 similar stylizations for different elements? Create 10 separate classes. In most other methodologies, a single global class is created for such modifications, which can be applied to all suitable elements:
-[code]
-.text-red { color: red; }
-[/code]
-[code]
-<h1 class="article_heading text-red">Title</h1>
-<h2 class="article_subheading text-red">Another title</h2>
-<p class="paragraph_main text-red">Lorem ipsum dolor sit amet</p>
-[/code]
-Unlike other methodologies, the structure of HTML blocks and elements (sizes, alignment, padding, and margins) is not separated from the styling (colors, line thickness, shadows, and other stylistic embellishments). Everything is lumped together in a single class.
-[example]
-[code]
-.document-title {
+.documentTitle {
   text-align: center;
   margin: 2rem 0 1rem;
 }
 
-.section-container {
+.sectionContainer {
   margin: auto;
   width: 60%;
-  background: #ddd;
 }
 
 .carousel {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  background: #111;
 }
 
-.carousel__button-container {
+.buttonContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 7rem;
 }
 
-.carousel__button {
+.buttonBorderless {
   border: none;
-  background: #111;
-  color: #fff;
+  color: white;
   text-transform: uppercase;
   &:hover {
     color: #7fff17;
   }
 }
 
-.carousel__button--disabled {
+.disabled {
   display: none;
 }
 
-.section-container__header {
+.subheader {
   margin: 1.2rem 0 0 0;
 }
 
-.section-container__header--main {
+.sectionTitle {
   margin: auto;
   padding: 0.8rem 0;
   text-align: center;
+}
+
+.paragraph {
+  margin: 0;
+}
+
+.bgGreyLight {
+  background: #ddd;
+}
+
+.bgGreyDark {
+  background: #111;
+}
+
+.bgPros {
+  background: #e1f7dc;
+}
+
+.bgCons {
+  background: #ffe3e3;
+}
+
+.clYellowPale {
   color: #f7e38f;
 }
 
-.section-container__header--pros {
+.billetPros {
   background: #126300;
   color: #ddd;
 }
 
-.section-container__header--cons {
+.billetCons {
   background: #8f0404;
   color: #ddd;
-}
-
-.section-container__paragraph {
-  margin: 0;
-}
-
-.section-container__paragraph--pros {
-  background: #e1f7dc;
-}
-
-.section-container__paragraph--cons {
-  background: #ffe3e3;
 }
 
 .chili-db {
@@ -153,29 +127,11 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   }
 }
 
-.chili-db__menu-item-1 {
-  padding-left: 0.7rem;
-  z-index: 30;
-}
-
-.chili-db__menu-item-2 {
-  z-index: 29;
-}
-
-.chili-db__menu-item-3 {
-  z-index: 28;
-}
-
-.chili-db__menu-item-4 {
-  z-index: 27;
-}
-
-.chili-db__menu-item-5 {
-  z-index: 26;
-}
-
-.chili-db__menu-item-6 {
-  z-index: 25;
+@for $i from 1 through 6 {
+  .chili-db__menu-item-#{$i} {
+    z-index: 31 - $i;
+    @if $i == 1 {padding-left: 0.7rem};
+  }
 }
 
 .chili-db__browser {
@@ -408,4 +364,3 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
     font-size: 1rem;
   }
 }
-[/code]

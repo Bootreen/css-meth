@@ -1,6 +1,6 @@
 [title]OOCSS (Object Oriented CSS)
 [header]In a nutshell
-A more recent but still old methodology, which is based on the principle of class reusability. From the perspective of OOCSS (Object-Oriented CSS), a CSS object is a recurring design pattern that can be formatted as an independent piece of CSS code and then reused. To facilitate the deconstruction of the design, two main rules are used.
+A more recent but still old methodology, which is based on the principle of class reusability. From the OOCSS perspective, a CSS object is a recurring design pattern that can be formatted as an independent piece of CSS code and then reused. To facilitate the deconstruction of the design, two main rules are used.
 1. To separate the structure and the skin.
 [code]
 .buttonStructure {
@@ -18,7 +18,7 @@ A more recent but still old methodology, which is based on the principle of clas
   color: #333;
 }
 [/code]
-Separate container and content. Essentially, this rule prohibits the use of CSS combinators (compound selectors) because they have higher specificity, which hinders the reusability of CSS code. For example, such tricks in OOCSS are forbidden:
+Separate container and content. Essentially, this rule prohibits the use of compound CSS selectors because they have higher specificity, which hinders the reusability of CSS code. For example, such tricks in OOCSS are forbidden:
 [code]
 #sidebar .list .list-header {
   font-size: 16px;
@@ -46,7 +46,7 @@ Sidebar, list, and list-header should not only be separate classes but also have
 [/code]
 [pros]
 Reusable and more compact CSS code. Excellent scalability.
-OOCSS pairs well with CSS preprocessors like SASS. The use of variables, mixins, and other features allows for even greater reusability of CSS elements.
+OOCSS pairs well with CSS preprocessors like SASS. The use of variables, mixins, and other dynamic CSS features allows for even greater reusability of CSS elements.
 Better readability, especially compared to BEM. Additionally, the official OOCSS guideline recommends using camelCase for class names, all in a stylish manner.
 [cons]
 More classes compared to legacy approaches.

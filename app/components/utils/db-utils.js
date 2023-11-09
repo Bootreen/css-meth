@@ -87,4 +87,3 @@ export const fetchedColorTraits = (() => {
   });
   return mapChecks(colorTraits);
 })();
-

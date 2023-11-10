@@ -173,13 +173,13 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   &:hover {
     background-color: #111;
     color: #f7e38f;
+    cursor: pointer;
   }
 }
 
 .chili-db__list-search-field {
   width: 100%;
   height: 2rem;
-  font-size: 1rem;
   padding-left: 0.25rem;
 }
 
@@ -211,7 +211,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 
 .chili-db__preview-column {
   grid-area: browser;
-  align-self: center;
+  align-self: flex-start;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   grid-template-areas:
@@ -360,16 +360,61 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 }
 
 @media (max-width: 1280px) {
-  .section-container {
-    width: 95%;
-  }
+  .section-container { width: 95%; }
 
-  body {
-    font-size: 1.1rem;
-  }
+  body { font-size: 1.1rem; }
+
+  code { font-size: 1rem; }
+}
+
+@media (max-width: 768px) {
+  .section-container { width: 100%; }
+
+  body { font-size: 0.9rem; }
 
   code {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    padding: 0.5rem;
   }
+
+  h1 { font-size: 1.3rem;}
+
+  h2 { font-size: 1.1rem;}
+
+  h3 { font-size: 1rem;}
+
+  h5 { font-size: 0.6rem;}
+
+  p, h3 { padding: 0.3rem 1rem; }
+
+  .chili-db__menu-item {
+    padding: 0.3rem 0.3rem 0.3rem 1rem;
+    margin-right: -0.7rem;
+  }
+
+  .chili-db__menu-item-1 { padding-left: 0.3rem; }
+
+  .chili-db__browser {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "search"
+      "list"
+      "browser";
+    background: #ddd;
+  }
+
+  .chili-db__list-container { height: auto }
+
+  .chili-db__preview-column {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "image"
+      "specs"
+      "description";
+    margin: 0.6rem;
+  }
+
+  .chili-db__preview-img-container { margin: auto; }
 }
 [/code]

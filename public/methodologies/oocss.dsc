@@ -1,7 +1,7 @@
 [title]OOCSS (Object Oriented CSS)
 [header]In a nutshell
 A more recent but still old methodology, which is based on the principle of class reusability. From the OOCSS perspective, a CSS object is a recurring design pattern that can be formatted as an independent piece of CSS code and then reused. To facilitate the deconstruction of the design, two main rules are used.
-1. To separate the structure and the skin.
+1. Separate structure and skin.
 [code]
 .buttonStructure {
   width: 100px;
@@ -18,7 +18,7 @@ A more recent but still old methodology, which is based on the principle of clas
   color: #333;
 }
 [/code]
-Separate container and content. Essentially, this rule prohibits the use of compound CSS selectors because they have higher specificity, which hinders the reusability of CSS code. For example, such tricks in OOCSS are forbidden:
+2. Separate container and content. Essentially, this rule prohibits the use of compound CSS selectors because they have higher specificity, which hinders the reusability of CSS code. For example, such tricks in OOCSS are forbidden:
 [code]
 #sidebar .list .list-header {
   font-size: 16px;

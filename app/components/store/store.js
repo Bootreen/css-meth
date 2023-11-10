@@ -37,14 +37,14 @@ const dbStore = (set, get) => ({
 
   actions: {
 
-    firstSection: () => get().section === 0 ? true : false,
+    isFirstSection: () => get().section === 0 ? true : false,
 
-    lastSection: () => get().sectionsTotal - get().section === 1 ? true : false,
+    isLastSection: () => get().sectionsTotal - get().section === 1 ? true : false,
 
-    incSection: () => set(state => !get().actions.lastSection() ?
+    incSection: () => set(state => !get().actions.isLastSection() ?
         {section: state.section + 1} : {section: state.section}),
 
-    decSection: () => set(state => !get().actions.firstSection() ?
+    decSection: () => set(state => !get().actions.isFirstSection() ?
         {section: state.section - 1} : {section: state.section}),
 
     changeSection: destination => {

@@ -1,4 +1,3 @@
-import './styles/common.css';
 import './styles/hljs.css';
 import { classNames } from './styles/class-names';
 import getData from './components/utils/fetch-data';

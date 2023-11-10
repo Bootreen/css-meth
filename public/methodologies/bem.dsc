@@ -281,7 +281,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   float: right;
   padding: 0 0.25rem;
   user-select: none;
-  &:hover, &:focus {
+  &:hover {
     color: red;
     text-decoration: none;
     cursor: pointer;
@@ -330,7 +330,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   border-radius: 0.25rem;
   background-color: #609255;
   color: #eee;
-  &:hover, &:focus {
+  &:hover {
     color: #ffd51a;
     text-decoration: none;
     cursor: pointer;

@@ -1,5 +1,6 @@
 'use client'
 
+import '@/app//styles/common.css';
 import '@/app/styles/bem.scss';
 import '@/app/styles/oocss.scss';
 import { useEffect } from 'react';
@@ -18,8 +19,8 @@ export const Section = ({ description, templates }) => {
   const section = useDbStore(state => state.section);
 
   const {
-    firstSection,
-    lastSection,
+    isFirstSection,
+    isLastSection,
     changeSection,
     toogleModalFilter,
   } = useStoreActions();
@@ -43,8 +44,8 @@ export const Section = ({ description, templates }) => {
           chunk={main}
           type='main'
           tmpl={tmpl}
-          first={firstSection()}
-          last={lastSection()}
+          first={isFirstSection()}
+          last={isLastSection()}
           handler={sectionHandler}
         />
         <DatabaseBrowser modalHandler={filterHandler} tmpl={tmpl} />

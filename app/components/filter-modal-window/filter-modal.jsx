@@ -59,7 +59,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
           <CheckboxGroup
             array={plantSizes}
             handler={plantSizeFilter}
-            label='spiciness'
+            label='plant-size'
             tmpl={tmpl}
           />
         </div>
@@ -68,13 +68,14 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
           <CheckboxGroup
             array={fruitSizes}
             handler={fruitSizeFilter}
-            label='spiciness'
+            label='fruit-size'
             tmpl={tmpl}
           />
         </div>
         <div className={tmpl.modalColumn}>
           <h5 className={tmpl.modalSubHdr}>Fruit shape</h5>
           <select
+            name='shapes'
             className={tmpl.modalDropDn}
             disabled={shapes[0].all}
             onChange={shapesAddFilter}
@@ -91,6 +92,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
           <br/>
           <h5 className={tmpl.modalSubHdr}>Shape trait</h5>
           <select
+            name='shape-traits'
             className={tmpl.modalDropDn}
             disabled={shapeTraits[0].all}
             onChange={shapeTraitsAddFilter}
@@ -108,6 +110,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
         <div className={tmpl.modalColumn}>
           <h5 className={tmpl.modalSubHdr}>Fruit color</h5>
           <select
+            name='colors'
             className={tmpl.modalDropDn}
             disabled={colors[0].all}
             onChange={colorsAddFilter}
@@ -124,6 +127,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
           <br/>
           <h5 className={tmpl.modalSubHdr}>Color trait</h5>
           <select
+            name='color-traits'
             className={tmpl.modalDropDn}
             disabled={colorTraits[0].all}
             onChange={colorTraitsAddFilter}

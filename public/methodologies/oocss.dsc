@@ -136,16 +136,10 @@ In general, OOCSS is better utilized in the form of ready-made frameworks when a
 }
 
 @media (max-width: 1280px) {
-  .sectionContainer {
-    width: 95%;
-  }
+  .sectionContainer { width: 95%; }
 
-  body {
-    font-size: 1.1rem;
-  }
+  body { font-size: 1.1rem; }
 
-  code {
-    font-size: 1rem;
-  }
+  code { font-size: 1rem; }
 }
 [/code]

@@ -64,6 +64,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   text-transform: uppercase;
   &:hover {
     color: #7fff17;
+    cursor: pointer;
   }
 }
 
@@ -356,6 +357,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   &:hover {
     background-color: #111;
     color: #f7e38f;
+    cursor: pointer;
   }
 }
 
@@ -374,7 +376,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 
   code {
     font-size: 0.8rem;
-    padding: 0.5rem;
+    padding: 1rem;
   }
 
   h1 { font-size: 1.3rem;}
@@ -400,7 +402,6 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
       "search"
       "list"
       "browser";
-    background: #ddd;
   }
 
   .chili-db__list-container { height: auto }

@@ -55,10 +55,85 @@ It's not well-suited for small or even medium-sized projects because the time sp
 In general, OOCSS is better utilized in the form of ready-made frameworks when all classes, as well as ready templates and primitives for layout, have already been devised for you, and all you need to do is memorize and start using them. The most well-known example of such a framework based on OOCSS is Bootstrap.
 [example]
 [code]
-.documentTitle {
-  text-align: center;
-  margin: 2rem 0 1rem;
+$backgrounds: bgMT, bgWhite, bgConcrete, bgGreyLight, bgBlack, bgGreyDark, bgPros, bgCons,
+  bgGreen, bgGreenPale, bgRedDark, bgRedCoral;
+$bgColors: #999, #fff, #bbb, #ddd, #111, #222, #e1f7dc, #ffe3e3,
+  #126300, #609255, #8f0404, #d40c02;
+@each $name in $backgrounds {
+  $i: index($backgrounds, $name);
+  .#{$name} {
+    background-color: nth($bgColors, $i);
+    @if $i == 1 {user-select: none}
+  }
 }
+
+$colorNames: clWhite, clPaper, clGreyLight, clGreyDark, clYellowPale, clRed;
+$colors: #fff, #eee, #ddd, #222, #f7e38f, red;
+@each $name in $colorNames {
+  $i: index($colorNames, $name);
+  .#{$name} {color: nth($colors, $i)}
+}
+
+$hoverStyles: hoverLime, hoverYellowPale, hoverActive, hoverRed, hoverCanary;
+$hoverColors: #7fff17, #f7e38f, #000, inherit, red, #ffd51a;
+$hoverBgs: transparent, #111, #ddd, transparent, transparent;
+$hoverCursors: pointer, pointer, auto, pointer, pointer;
+@each $name in $hoverStyles {
+  $i: index($hoverStyles, $name);
+  .#{$name} {
+    &:hover {
+      color: nth($hoverColors, $i);
+      background-color: nth($hoverBgs, $i);
+      cursor: nth($hoverCursors, $i);
+      text-decoration: none;
+    }
+  }
+}
+
+.borderDarkRounded {
+  border: 2px solid #333;
+  border-radius: 0.3rem;
+}
+
+.borderMT {
+  border-top: 0.125rem solid #000;
+  border-right: 0.125rem solid #000;
+  border-bottom: 0.125rem solid #000;
+  border-top-right-radius: 1rem;
+}
+
+.borderBottomOff { border-bottom: none; }
+
+.borderDottedYellow { border: 0.125rem dotted #f7e38f; }
+
+.borderInsetRounded {
+  border: 0.25rem inset;
+  border-radius: 1rem;
+}
+
+.borderOutset { border: 0.25rem outset; }
+
+.disabled { display: none; }
+
+.centered { text-align: center; }
+
+.textStrong { font-weight: 600; }
+
+.flexRow {
+  display: flex;
+  flex-flow: row;
+}
+
+.flexColumn {
+  display: flex;
+  flex-flow: column;
+}
+
+.flexWrap { flex-wrap: wrap; }
+
+.flexFill { flex-grow: 1; }
+
+.documentTitle { margin: 2rem 0 1rem; }
 
 .sectionContainer {
   margin: auto;
@@ -66,13 +141,11 @@ In general, OOCSS is better utilized in the form of ready-made frameworks when a
 }
 
 .carousel {
-  display: flex;
   align-items: stretch;
   justify-content: space-between;
 }
 
 .buttonContainer {
-  display: flex;
   align-items: center;
   justify-content: center;
   width: 7rem;
@@ -80,59 +153,183 @@ In general, OOCSS is better utilized in the form of ready-made frameworks when a
 
 .buttonBorderless {
   border: none;
-  color: white;
   text-transform: uppercase;
-  &:hover {
-    color: #7fff17;
-  }
 }
 
-.disabled {
-  display: none;
-}
-
-.subheader {
-  margin: 1.2rem 0 0 0;
-}
+.subheader { margin: 1.2rem 0 0 0; }
 
 .sectionTitle {
   margin: auto;
   padding: 0.8rem 0;
-  text-align: center;
 }
 
-.paragraph {
-  margin: 0;
+.paragraph { margin: 0; }
+
+.chiliDb { margin: 1rem; }
+
+.dbTitle { padding: 1rem 0; }
+
+.menuTab {
+  padding: 0.6rem 0.6rem 0.6rem 1.2rem;
+  margin-right: -0.7rem;
 }
 
-.bgGreyLight {
-  background: #ddd;
+@for $i from 1 through 6 {
+  .menuTab-#{$i} {
+    z-index: 31 - $i;
+    @if $i == 1 {padding-left: 0.7rem};
+  }
 }
 
-.bgGreyDark {
-  background: #111;
+.menuItemPlaceholder { border-bottom: 0.125rem solid #000; }
+
+.dbBrowser {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  grid-template-areas:
+    "search browser"
+    "list browser";
 }
 
-.bgPros {
-  background: #e1f7dc;
+.dbSearchContainer {
+  grid-area: search;
+  column-gap: 0.5rem;
+  padding: 1rem;
 }
 
-.bgCons {
-  background: #ffe3e3;
+.dbFilterButton {
+  width: 6rem;
+  height: 2rem;
 }
 
-.clYellowPale {
-  color: #f7e38f;
+.dbSearchField {
+  width: 100%;
+  height: 2rem;
+  padding-left: 0.25rem;
 }
 
-.billetPros {
-  background: #126300;
-  color: #ddd;
+.dbListContainer {
+  grid-area: list;
+  height: 40rem;
+  margin: 0 1rem;
+  overflow-y: auto;
 }
 
-.billetCons {
-  background: #8f0404;
-  color: #ddd;
+.dbListItem {
+  padding: 0.125rem;
+  &:hover {
+    cursor: default;
+  }
+}
+
+.dbPreviewColumn {
+  grid-area: browser;
+  align-self: flex-start;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-areas:
+    "header header"
+    "image specs"
+    "description description";
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.dbPreviewTitle { grid-area: header; }
+
+.dbImageContainer {
+  margin-left: 0.5rem;
+  grid-area: image;
+  width: 98%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+.dbImage { border-radius: 1rem; }
+
+.dbPreviewSpecs {
+  grid-area: specs;
+  list-style-type: "● ";
+  margin: 0.5rem 0 0 1.6rem;
+}
+
+.dbPreviewSpecsItem { font-size: 1rem; }
+
+.dbPreviewDescription {
+  grid-area: description;
+  font-size: 1.1rem;
+}
+
+.modalFilter {
+  display: none;
+  position: fixed;
+  z-index: 30;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+}
+
+.visible { display: block; }
+
+.modalFilterHeader {
+  font-size: 1.4rem;
+  margin-top: 0.125rem;
+}
+
+.modalFilterSubheader {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.closeButton {
+  float: right;
+  padding: 0 0.25rem;
+  user-select: none;
+}
+
+.columnsContainer {
+  padding: 1.125rem;
+  column-gap: 2rem;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.25rem 0;
+}
+
+.checkboxLabel {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.dropdown {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  font-size: 1.2rem;
+  line-height: 100%;
+  width: min-content;
+  padding: 0 0.25rem 0.25rem 0.25rem;
+  margin-bottom: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.tagRemoveButton {
+  font-size: 1.4rem;
+  margin-left: 0.25rem;
+}
+
+.controlsContainer {
+  margin-bottom: 1rem;
+  justify-content: center;
+  column-gap: 1rem;
+}
+
+.controlButton {
+  font-size: 1.1rem;
+  padding: 0.25rem 0.5rem;
 }
 
 @media (max-width: 1280px) {
@@ -141,5 +338,55 @@ In general, OOCSS is better utilized in the form of ready-made frameworks when a
   body { font-size: 1.1rem; }
 
   code { font-size: 1rem; }
+}
+
+@media (max-width: 768px) {
+  .sectionContainer { width: 100%; }
+
+  body { font-size: 0.9rem; }
+
+  code {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+
+  h1 { font-size: 1.3rem;}
+
+  h2 { font-size: 1.1rem;}
+
+  h3 { font-size: 1rem;}
+
+  h5 { font-size: 0.6rem;}
+
+  p, h3 { padding: 0.3rem 1rem; }
+
+  .menuTab {
+    padding: 0.3rem 0.3rem 0.3rem 1rem;
+    margin-right: -0.7rem;
+  }
+
+  .menuTab-1 { padding-left: 0.3rem; }
+
+  .dbBrowser {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "search"
+      "list"
+      "browser";
+  }
+
+  .dbListContainer { height: auto }
+
+  .dbPreviewColumn {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "image"
+      "specs"
+      "description";
+    margin: 0.6rem;
+  }
+
+  .dbImageContainer { margin: auto; }
 }
 [/code]

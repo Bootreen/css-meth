@@ -30,6 +30,7 @@
   text-transform: uppercase;
   &:hover {
     color: #7fff17;
+    cursor: pointer;
   }
 }
 
@@ -322,6 +323,7 @@
   &:hover {
     background-color: #111;
     color: #f7e38f;
+    cursor: pointer;
   }
 }
 
@@ -340,7 +342,7 @@
 
   code {
     font-size: 0.8rem;
-    padding: 0.5rem;
+    padding: 1rem;
   }
 
   h1 { font-size: 1.3rem;}
@@ -366,7 +368,6 @@
       "search"
       "list"
       "browser";
-    background: #ddd;
   }
 
   .chili-db__list-container { height: auto }

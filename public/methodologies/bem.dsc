@@ -1,5 +1,8 @@
 [title]BEM (Block - Element - Modifier)
-[header]In a nutshell
+[header]Disclaimer
+The purpose of this project is to visually demonstrate various CSS methodologies. Each individual page contains a brief description, advantages, and disadvantages of the chosen methodology. Furthermore, each page is styled specifically according to that methodology. You can inspect the style distribution in the HTML document using the browser's Inspect tool, and at the end of the document, a complete CSS file is provided.
+To highlight the differences, an elaborate interactive interface component is utilized— a content viewer with tabs, search, and filters.
+[header]BEM in a nutshell
 Outdated mammoth crap, invented by Yandex back in 2005. It captivates with its simplicity. Hardly used anywhere except in the post-Soviet space.
 According to BEM, the entire layout can be divided into functionally isolated blocks. For examples: menu, article, sidebar, and search field. Blocks, in turn, consist of elements (menu item, header, paragraph). For both blocks and elements, additional modifier classes can be created as needed, which change their default properties (e.g., active, selected, disabled, and so on).
 Nested block structures are ignored; from the perspective of BEM, all blocks belong to the same global level.
@@ -257,7 +260,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 .modal-filter {
   display: none;
   position: fixed;
-  z-index: 30;
+  z-index: 31;
   top: 20%;
   left: 50%;
   transform: translate(-50%, 20%);
@@ -290,8 +293,10 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 }
 
 .modal-filter__columns-container {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "spiciness plant-size fruit-size fruit-shape fruit-color";
   padding: 1.125rem;
   column-gap: 2rem;
 }
@@ -301,14 +306,19 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   flex-direction: column;
 }
 
+$columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
+@each $name in $columnNames {
+  .modal-filter__column--#{$name} {grid-area: $name}
+}
+
 .modal-filter__checkbox-element {
   display: flex;
   flex-direction: row;
 }
 
 .modal-filter__checkbox {
-  width: 1rem;
-  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
   margin: 0.25rem 0;
 }
 
@@ -417,5 +427,30 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   }
 
   .chili-db__preview-img-container { margin: auto; }
+
+  .modal-filter__header { font-size: 1rem; }
+
+  .modal-filter__subheader,
+  .modal-filter__label,
+  .modal-filter__dropdown,
+  .modal-filter__tag,
+  .modal-filter__tag-remove-button,
+  .modal-filter__control-button { font-size: 0.8rem; }
+
+  .modal-filter__tag {
+    line-height: 120%;
+    padding: 0 0.25rem 0.125rem 0.25rem;
+  }
+
+  .modal-filter__columns-container {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "spiciness plant-size fruit-size"
+      "fruit-shape fruit-color ...";
+    padding: 1rem;
+    column-gap: 1rem;
+  }
+
+  .modal-filter__column { margin-bottom: 1rem; }
 }
 [/code]

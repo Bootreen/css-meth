@@ -14,7 +14,6 @@ import {
   arraysIntersection,
 } from '../utils/db-utils';
 
-// custom Array.prototype method for arrays intersection search
 Array.prototype.includesOneOf = arraysIntersection;
 
 const dbStore = (set, get) => ({
@@ -90,12 +89,12 @@ const dbStore = (set, get) => ({
         // Fruit shape traits filtering
         .filter(e => Object.values(get().shapeTraits[0])[0] ? true :
           // if "no trait" selected
-          Object.values(get().shapeTraits[1])[0] ? !e.fruitShape.includes(' ') ? true :
+          Object.values(get().shapeTraits[1])[0] && !e.fruitShape.includes(' ') ? true :
             // process common cases
             get().shapeTraits
               .filter(e => Object.values(e)[0])
               .map(e => Object.keys(e)[0])
-              .includesOneOf(e.fruitShape.split(' ')) : false)
+              .includesOneOf(e.fruitShape.split(' ')) ? true : false)
 
         // Fruit color filtering
         .filter(e => Object.values(get().colors[0])[0] ? true : get().colors
@@ -105,11 +104,11 @@ const dbStore = (set, get) => ({
 
         // Fruit color traits filtering
         .filter(e => Object.values(get().colorTraits[0])[0] ? true :
-          Object.values(get().colorTraits[1])[0] ? !e.fruitColor.includes(' ') ? true :
+          Object.values(get().colorTraits[1])[0] && !e.fruitColor.includes(' ') ? true :
             get().colorTraits
               .filter(e => Object.values(e)[0])
               .map(e => Object.keys(e)[0])
-              .includesOneOf(e.fruitColor.split(' ')) : false)
+              .includesOneOf(e.fruitColor.split(' ')) ? true : false)
     }),
 
     setActiveListItem: itemId => set({activeListItem: itemId}),

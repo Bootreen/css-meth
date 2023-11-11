@@ -45,7 +45,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
         Filters<span className={tmpl.modalCloseBtn} onClick={modalHandler}>&times;</span>
       </h4>
       <div className={tmpl.modalColumnsCont}>
-        <div className={tmpl.modalColumn}>
+        <div className={tmpl.modalColumn1}>
           <h5 className={tmpl.modalSubHdr}>Spiciness</h5>
           <CheckboxGroup
             array={spiciness}
@@ -54,7 +54,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
             tmpl={tmpl}
           />
         </div>
-        <div className={tmpl.modalColumn}>
+        <div className={tmpl.modalColumn2}>
           <h5 className={tmpl.modalSubHdr}>Plant size</h5>
           <CheckboxGroup
             array={plantSizes}
@@ -63,7 +63,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
             tmpl={tmpl}
           />
         </div>
-        <div className={tmpl.modalColumn}>
+        <div className={tmpl.modalColumn3}>
           <h5 className={tmpl.modalSubHdr}>Fruit size</h5>
           <CheckboxGroup
             array={fruitSizes}
@@ -72,7 +72,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
             tmpl={tmpl}
           />
         </div>
-        <div className={tmpl.modalColumn}>
+        <div className={tmpl.modalColumn4}>
           <h5 className={tmpl.modalSubHdr}>Fruit shape</h5>
           <select
             name='shapes'
@@ -107,7 +107,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
             tmpl={tmpl}
           />
         </div>
-        <div className={tmpl.modalColumn}>
+        <div className={tmpl.modalColumn5}>
           <h5 className={tmpl.modalSubHdr}>Fruit color</h5>
           <select
             name='colors'

@@ -47,7 +47,7 @@ Sidebar, list, and list-header should not only be separate classes but also have
 [pros]
 Reusable and more compact CSS code. Excellent scalability.
 OOCSS pairs well with CSS preprocessors like SASS. The use of variables, mixins, and other dynamic CSS features allows for even greater reusability of CSS elements.
-Better readability, especially compared to BEM. Additionally, the official OOCSS guideline recommends using camelCase for class names, all in a stylish manner.
+Better HTML-readability, especially compared to BEM. Additionally, the official OOCSS guideline recommends using camelCase for class names, all in a stylish manner.
 [cons]
 More classes compared to legacy approaches.
 The methodology is very general and allows for a variety of styles and approaches to class grouping, which can be a labor-intensive task in the end.
@@ -55,10 +55,10 @@ It's not well-suited for small or even medium-sized projects because the time sp
 In general, OOCSS is better utilized in the form of ready-made frameworks when all classes, as well as ready templates and primitives for layout, have already been devised for you, and all you need to do is memorize and start using them. The most well-known example of such a framework based on OOCSS is Bootstrap.
 [example]
 [code]
-$backgrounds: bgMT, bgWhite, bgConcrete, bgGreyLight, bgBlack, bgGreyDark, bgPros, bgCons,
-  bgGreen, bgGreenPale, bgRedDark, bgRedCoral;
-$bgColors: #999, #fff, #bbb, #ddd, #111, #222, #e1f7dc, #ffe3e3,
-  #126300, #609255, #8f0404, #d40c02;
+$backgrounds: bgMT, bgWhite, bgConcrete, bgGreyLight, bgBlack, bgGreyDark,
+  bgPros, bgCons, bgGreen, bgGreenPale, bgRedDark, bgRedCoral;
+$bgColors: #999, #fff, #bbb, #ddd, #111, #222,
+  #e1f7dc, #ffe3e3, #126300, #609255, #8f0404, #d40c02;
 @each $name in $backgrounds {
   $i: index($backgrounds, $name);
   .#{$name} {
@@ -262,7 +262,7 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
 .modalFilter {
   display: none;
   position: fixed;
-  z-index: 30;
+  z-index: 31;
   top: 20%;
   left: 50%;
   transform: translate(-50%, 20%);
@@ -287,13 +287,24 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
 }
 
 .columnsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "Spiciness PlantSize FruitSize FruitShape FruitColor";
   padding: 1.125rem;
   column-gap: 2rem;
 }
 
+.column { margin-bottom: 0; }
+
+$columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
+@each $name in $columnNames {
+  .column#{$name} {grid-area: $name}
+}
+
 .checkbox {
-  width: 1rem;
-  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
   margin: 0.25rem 0;
 }
 
@@ -388,5 +399,30 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
   }
 
   .dbImageContainer { margin: auto; }
+
+  .modalFilterHeader { font-size: 1rem; }
+
+  .modalFilterSubheader,
+  .checkboxLabel,
+  .dropdown,
+  .tag,
+  .tagRemoveButtonn,
+  .controlButton { font-size: 0.8rem; }
+
+  .tag {
+    line-height: 120%;
+    padding: 0 0.25rem 0.125rem 0.25rem;
+  }
+
+  .columnsContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "Spiciness PlantSize FruitSize"
+      "FruitShape FruitColor ...";
+    padding: 1rem;
+    column-gap: 1rem;
+  }
+
+  .column { margin-bottom: 1rem; }
 }
 [/code]

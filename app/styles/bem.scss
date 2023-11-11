@@ -223,7 +223,7 @@
 .modal-filter {
   display: none;
   position: fixed;
-  z-index: 30;
+  z-index: 31;
   top: 20%;
   left: 50%;
   transform: translate(-50%, 20%);
@@ -256,8 +256,10 @@
 }
 
 .modal-filter__columns-container {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "spiciness plant-size fruit-size fruit-shape fruit-color";
   padding: 1.125rem;
   column-gap: 2rem;
 }
@@ -267,14 +269,19 @@
   flex-direction: column;
 }
 
+$columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
+@each $name in $columnNames {
+  .modal-filter__column--#{$name} {grid-area: $name}
+}
+
 .modal-filter__checkbox-element {
   display: flex;
   flex-direction: row;
 }
 
 .modal-filter__checkbox {
-  width: 1rem;
-  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
   margin: 0.25rem 0;
 }
 
@@ -383,4 +390,29 @@
   }
 
   .chili-db__preview-img-container { margin: auto; }
+
+  .modal-filter__header { font-size: 1rem; }
+
+  .modal-filter__subheader,
+  .modal-filter__label,
+  .modal-filter__dropdown,
+  .modal-filter__tag,
+  .modal-filter__tag-remove-button,
+  .modal-filter__control-button { font-size: 0.8rem; }
+
+  .modal-filter__tag {
+    line-height: 120%;
+    padding: 0 0.25rem 0.125rem 0.25rem;
+  }
+
+  .modal-filter__columns-container {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "spiciness plant-size fruit-size"
+      "fruit-shape fruit-color ...";
+    padding: 1rem;
+    column-gap: 1rem;
+  }
+
+  .modal-filter__column { margin-bottom: 1rem; }
 }

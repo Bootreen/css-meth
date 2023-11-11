@@ -72,7 +72,7 @@ export const classNames = [
     carouselBtnCont: 'buttonContainer flexRow',
     carouselBtn: 'buttonBorderless clWhite bgBlack hoverLime',
     carouselBtnDis: 'buttonBorderless disabled',
-    sectionHdrMain: 'subheader sectionTitle clYellowPale',
+    sectionHdrMain: 'subheader sectionTitle clYellowPale centered',
     sectionHdr: 'subheader',
     sectionHdrPros: 'subheader clGreyLight bgGreen',
     sectionHdrCons: 'subheader clGreyLight bgRedDark',

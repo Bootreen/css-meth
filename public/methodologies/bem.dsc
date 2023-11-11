@@ -1,7 +1,7 @@
 [title]BEM (Block - Element - Modifier)
 [header]Disclaimer
 The purpose of this project is to visually demonstrate various CSS methodologies. Each individual page contains a brief description, advantages, and disadvantages of the chosen methodology. Furthermore, each page is styled specifically according to that methodology. You can inspect the style distribution in the HTML document using the browser's Inspect tool, and at the end of the document, a complete CSS file is provided.
-To highlight the differences, an elaborate interactive interface component is utilized— a content viewer with tabs, search, and filters.
+To highlight the differences, a complex interactive interface component is utilized — database content viewer with tabs, search, and filters.
 [header]BEM in a nutshell
 Outdated mammoth crap, invented by Yandex back in 2005. It captivates with its simplicity. Hardly used anywhere except in the post-Soviet space.
 According to BEM, the entire layout can be divided into functionally isolated blocks. For examples: menu, article, sidebar, and search field. Blocks, in turn, consist of elements (menu item, header, paragraph). For both blocks and elements, additional modifier classes can be created as needed, which change their default properties (e.g., active, selected, disabled, and so on).

@@ -71,9 +71,16 @@ export const DatabaseBrowser = ({ modalHandler, tmpl }) => {
           <div className={tmpl.dbPrevImgCont}>
             <Image
               className={tmpl.dbPrevImg}
-              fill={true}
-              sizes='(max-width: 500px) 100vw'
-              priority={true}
+              placeholder='blur'
+              blurDataURL={imgPref + list[activeListItem].image}
+              sizes='100vw'
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              width={500}
+              height={500}
+              loading='eager'
               src={imgPref + list[activeListItem].image}
               alt={list[activeListItem].name}
             />

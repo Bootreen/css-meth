@@ -3,6 +3,7 @@
 import '@/app//styles/common.css';
 import '@/app/styles/bem.scss';
 import '@/app/styles/oocss.scss';
+import '@/app/styles/atomic.scss';
 import { useEffect } from 'react';
 import { useDbStore, useStoreActions } from '../store/store';
 import { descParse } from '../utils/desc-parser';

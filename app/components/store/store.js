@@ -17,7 +17,7 @@ import {
 Array.prototype.includesOneOf = arraysIntersection;
 
 const dbStore = (set, get) => ({
-  sectionsTotal: 2,
+  sectionsTotal: 3,
   section: 0,
   tabs: initialTabs,
   activeTab: 0,

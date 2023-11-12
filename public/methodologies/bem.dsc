@@ -43,14 +43,14 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 .section-container {
   margin: auto;
   width: 60%;
-  background: #ddd;
+  background-color: #ddd;
 }
 
 .carousel {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  background: #111;
+  background-color: #111;
 }
 
 .carousel__button-container {
@@ -62,7 +62,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 
 .carousel__button {
   border: none;
-  background: #111;
+  background-color: #111;
   color: #fff;
   text-transform: uppercase;
   &:hover {
@@ -83,20 +83,20 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 }
 
 .section-container__header--pros {
-  background: #126300;
+  background-color: #126300;
   color: #ddd;
 }
 
 .section-container__header--cons {
-  background: #8f0404;
+  background-color: #8f0404;
   color: #ddd;
 }
 
 .section-container__paragraph { margin: 0; }
 
-.section-container__paragraph--pros { background: #e1f7dc; }
+.section-container__paragraph--pros { background-color: #e1f7dc; }
 
-.section-container__paragraph--cons { background: #ffe3e3; }
+.section-container__paragraph--cons { background-color: #ffe3e3; }
 
 .chili-db {
   display: flex;
@@ -160,7 +160,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   grid-template-areas:
     "search browser"
     "list browser";
-  background: #ddd;
+  background-color: #ddd;
 }
 
 .chili-db__list-search-container {

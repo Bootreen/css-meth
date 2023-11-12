@@ -65,7 +65,7 @@
   display: flex;
   flex-direction: column;
   margin: 1rem;
-  border: 2px solid #333;
+  border: 0.125rem solid #333;
   border-radius: 0.3rem;
   background-color: #bbb;
 }
@@ -361,6 +361,8 @@ $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
   h5 { font-size: 0.5rem;}
 
   p, h3 { padding: 0.3rem 1rem; }
+
+  .chili-db { margin: 0.25rem; }
 
   .chili-db__menu-item {
     padding: 0.25rem 0.25rem 0.25rem 0.9rem;

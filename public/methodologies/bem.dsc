@@ -102,7 +102,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
   display: flex;
   flex-direction: column;
   margin: 1rem;
-  border: 2px solid #333;
+  border: 0.125rem solid #333;
   border-radius: 0.3rem;
   background-color: #bbb;
 }
@@ -254,7 +254,7 @@ Unlike other methodologies, the structure of HTML blocks and elements (sizes, al
 
 .chili-db__preview-description {
   grid-area: description;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .modal-filter {
@@ -395,16 +395,18 @@ $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
 
   h3 { font-size: 1rem;}
 
-  h5 { font-size: 0.6rem;}
+  h5 { font-size: 0.5rem;}
 
   p, h3 { padding: 0.3rem 1rem; }
 
+  .chili-db { margin: 0.25rem; }
+
   .chili-db__menu-item {
-    padding: 0.3rem 0.3rem 0.3rem 1rem;
-    margin-right: -0.7rem;
+    padding: 0.25rem 0.25rem 0.25rem 0.9rem;
+    margin-right: -0.8rem;
   }
 
-  .chili-db__menu-item-1 { padding-left: 0.3rem; }
+  .chili-db__menu-item-1 { padding-left: 0.25rem; }
 
   .chili-db__browser {
     grid-template-columns: 1fr;
@@ -427,6 +429,12 @@ $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
   }
 
   .chili-db__preview-img-container { margin: auto; }
+
+  .modal-filter {
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
 
   .modal-filter__header { font-size: 1rem; }
 

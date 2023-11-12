@@ -91,7 +91,7 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
 }
 
 .borderDarkRounded {
-  border: 2px solid #333;
+  border: 0.125rem solid #333;
   border-radius: 0.3rem;
 }
 
@@ -256,7 +256,7 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
 
 .dbPreviewDescription {
   grid-area: description;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .modalFilter {
@@ -367,16 +367,18 @@ $columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
 
   h3 { font-size: 1rem;}
 
-  h5 { font-size: 0.6rem;}
+  h5 { font-size: 0.5rem;}
 
   p, h3 { padding: 0.3rem 1rem; }
 
+  .chiliDb { margin: 0.25rem; }
+
   .menuTab {
-    padding: 0.3rem 0.3rem 0.3rem 1rem;
-    margin-right: -0.7rem;
+    padding: 0.25rem 0.25rem 0.25rem 0.9rem;
+    margin-right: -0.8rem;
   }
 
-  .menuTab-1 { padding-left: 0.3rem; }
+  .menuTab-1 { padding-left: 0.25rem; }
 
   .dbBrowser {
     grid-template-columns: 1fr;

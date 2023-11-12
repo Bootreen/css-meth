@@ -64,7 +64,6 @@ export const classNames = [
   },
 
   // OOCSS
-  // temp placeholder
   {  // main section styles
     docTitle: 'documentTitle centered',
     section: 'sectionContainer bgGreyLight',
@@ -124,6 +123,68 @@ export const classNames = [
     modalTagRemoveBtn: 'tagRemoveButton',
     modalControlsCont: 'controlsContainer flexRow',
     modalControlBtn: 'controlButton hoverYellowPale'
+  },
+
+  // Atomic CSS
+  {  // main section styles
+    docTitle: 'Ta(c) M(2rem 0 1rem)',
+    section: 'M(a) W(60%) Bg(#ddd)',
+    carousel: 'D(f) Fld(r) Ai(st) Jc(sb) Bg(#111)',
+    carouselBtnCont: 'D(f) Fld(r) Ai(c) Jc(c) W(7rem)',
+    carouselBtn: 'Bd(n) Bg(#111) C(#fff) Tt(u) C(#7fff17):h Cur(p):h',
+    carouselBtnDis: 'D(n)',
+    sectionHdrMain: 'M(a) P(0.8rem 0) Ta(c) C(#f7e38f)',
+    sectionHdr: 'M(1.2rem 0 0 0)',
+    sectionHdrPros: 'M(1.2rem 0 0 0) Bg(#126300) C(#ddd)',
+    sectionHdrCons: 'M(1.2rem 0 0 0) Bg(#8f0404) C(#ddd)',
+    sectionPar: 'M(0)',
+    sectionParPros: 'M(0) Bg(#e1f7dc)',
+    sectionParCons: 'M(0) Bg(#ffe3e3)',
+    // db browser styles
+    db: 'D(f) Fld(c) M(1rem) Bd(0.125rem solid #333) Bdrs(0.3rem) Bgc(#bbb)',
+    dbHdr: '',
+    dbTitle: 'Ta(c) P(1rem 0)',
+    dbMenu: 'D(f) Fxf(row wrap)',
+    dbMenuItem: 'P(0.6rem 0.6rem 0.6rem 1.2rem) Mend(-0.7rem) Bdt(0.125rem solid #000) Bdend(0.125rem solid #000) Bdb(0.125rem solid #000) Bdrstend(1rem) Bgc(#999) Us(n) Bgc(#111):h C(#f7e38f):h Cur(p):h',
+    dbMenuItemActive: 'Bdb(n) Bgc(#ddd) Bgc(#ddd):h C(#000):h',
+    dbMenuItemPhld: 'Fxg(1) Bdb(0.125rem solid #000)',
+    dbBrowser: 'D(g) Gtc(0.6fr 1.4fr) Gta("search browser" "list browser") Bg(#ddd)',
+    dbSearchCont: 'Ga(search) D(f) Fld(r) Colmg(0.5rem) P(1rem)',
+    dbFilterBtn: 'W(6rem) H(2rem) Bgc(#111):h C(#f7e38f):h Cur(p):h',
+    dbSearchField: 'W(100%) H(2rem) Pstart(0.25rem)',
+    dbListCont: 'Ga(list) H(40rem) M(0 1rem) Ovy(a)',
+    dbListCol: '',
+    dbListItem: 'C(#222) P(0.125rem) Cur(d):h',
+    dbListItemActive: 'C(#f7e38f) Bgc(#222) Bd(0.125rem dotted #f7e38f)',
+    dbPrevCol: 'Ga(browser) As(fs) D(g) Gtc(1.2fr 0.8fr) Gta("header header" "image specs" "description description") M(0.5rem 0.5rem 0.5rem 0) Bd(0.25rem inset) Bdrs(1rem)',
+    dbPrevTitle: 'Ga(header) Ta(c)',
+    dbPrevImgCont: 'Ga(image) Mstart(0.5rem) W(98%) Ar(1/1) Pos(r)',
+    dbPrevImg: 'Bdrs(1rem)',
+    dbPrvSpecs: 'Ga(specs) List("● ") M(0.5rem 0 0 1.6rem)',
+    dbPrvSpecsItem: 'Fz(1rem)',
+    dbPrvSpecsItemStrong: 'Fw(600)',
+    dbPrvDesc: 'Ga(description) Fz(1rem)',
+    hlText: 'C(#eee) Bgc(#d40c02)',
+    // modal window styles
+    modalWnd: 'D(n) Pos(f) Z(31) T(20%) Start(50%) Translate(-50%+20%) Bgc(#fff) Bd(0.25rem outset)',
+    modalWndVis: 'D(n) Pos(f) Z(31) T(20%) Start(50%) Translate(-50%+20%) Bgc(#fff) Bd(0.25rem outset) D(b)',
+    modalHdr: 'Fz(1.4rem) Ta(c) Mt(0.125rem)',
+    modalCloseBtn: 'Fl(end) P(0 0.25rem) Us(n) C(red):h Td(n):h Cur(p):h',
+    modalColumnsCont: 'D(g) Gtc(1fr 1fr 1fr 1fr 1fr) Gta("spiciness plantSize fruitSize fruitShape fruitColor") P(1.125rem) Colmg(2rem)',
+    modalColumn1: 'D(f) Fld(c) Ga(spiciness)',
+    modalColumn2: 'D(f) Fld(c) Ga(plantSize)',
+    modalColumn3: 'D(f) Fld(c) Ga(fruitSize)',
+    modalColumn4: 'D(f) Fld(c) Ga(fruitShape)',
+    modalColumn5: 'D(f) Fld(c) Ga(fruitColor)',
+    modalSubHdr: 'Fz(1.1rem) Mb(0.5rem)',
+    modalCheckboxEl: 'D(f) Fld(c)',
+    modalCheckbox: 'Miw(1rem) Mih(1rem) M(0.25rem 0)',
+    modalLbl: 'Fz(1.2rem) Mstart(0.5rem)',
+    modalDropDn: 'Fz(1.2rem) Mb(0.5rem)',
+    modalTag: 'Fz(1.2rem) Lh(100%) W(minc) P(0 0.25rem 0.25rem 0.25rem) Mb(0.25rem) Bdrs(0.25rem) Bgc(#609255) C(#eee) C(#ffd51a):h Td(n):h Cur(p):h',
+    modalTagRemoveBtn: 'Fz(1.4rem) Mstart(0.25rem)',
+    modalControlsCont: 'D(f) Fld(r) Jc(c) Mb(1rem) Colmg(1rem)',
+    modalControlBtn: 'Fz(1.1rem) P(0.25rem 0.5rem) Bgc(#111):h C(#f7e38f):h Cur(p):h'
   },
 
 ]

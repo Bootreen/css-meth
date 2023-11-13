@@ -27,8 +27,8 @@ Classic Atomic does not get along well with CSS shorthand notation because any c
 (#000 1px solid)
 (#000 solid 1px)
 [/code]
-What's even worse is that spaces or commas in compound values cannot be used in CSS class names, even if escaped.
-Even less compatibility with arbitrary compound values in CSS attributes such as grid-template-areas, grid-template-columns, and similar ones. For such cases, custom classes need to be created:
+What's even worse is that spaces or commas in compound values cannot be used in CSS class names, even if escaped. Therefore, the "kosher" way is to specify each property (thickness, color, and style) separately. This also applies to compound values for margin, padding, etc.
+Atomic is even less compatibale with arbitrary compound values in CSS attributes such as grid-template-areas, grid-template-columns, and similar ones. For such cases, custom classes need to be created:
 [code]
 $GtcBrowser: 1.2fr 0.8fr;
 $GtaBrowser: "header header" "image specs" "description description";

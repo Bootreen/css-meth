@@ -134,7 +134,7 @@ export const classNames = [
     carouselBtn: 'Bd(n) Bgc(#111) C(#fff) Tt(u) C(#7fff17):h Cur(p):h',
     carouselBtnDis: 'D(n)',
     sectionHdrMain: 'M(a) Py(0.8rem) Px(0) Ta(c) C(#f7e38f)',
-    sectionHdr: 'M(1.2rem 0 0 0)',
+    sectionHdr: 'Mt(1.2rem) Mend(0) Mb(0) Mstart(0)',
     sectionHdrPros: 'Mt(1.2rem) Mend(0) Mb(0) Mstart(0) Bgc(#126300) C(#ddd)',
     sectionHdrCons: 'Mt(1.2rem) Mend(0) Mb(0) Mstart(0) Bgc(#8f0404) C(#ddd)',
     sectionPar: 'M(0)',

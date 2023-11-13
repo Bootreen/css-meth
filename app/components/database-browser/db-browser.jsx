@@ -15,8 +15,8 @@ export const DatabaseBrowser = ({ modalHandler, tmpl }) => {
   const activeListItem = useDbStore(state => state.activeListItem);
 
   const menuHandler = event => {
-    // extract the number from the supplement class "...menu-item--${number}"
-    setActiveTab(Number(event.target.className.replace(/\D+/g, '')) - 1);
+    // extract the number from the id
+    setActiveTab(Number(event.target.id.replace(/\D+/g, '')) - 1);
     filterList();
     setActiveListItem(0);
   };

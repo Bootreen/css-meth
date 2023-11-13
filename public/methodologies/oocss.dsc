@@ -55,10 +55,8 @@ It's not well-suited for small or even medium-sized projects because the time sp
 In general, OOCSS is better utilized in the form of ready-made frameworks when all classes, as well as ready templates and primitives for layout, have already been devised for you, and all you need to do is memorize and start using them. The most well-known example of such a framework based on OOCSS is Bootstrap.
 [example]
 [code]
-$backgrounds: bgMT, bgWhite, bgConcrete, bgGreyLight, bgBlack, bgGreyDark,
-  bgPros, bgCons, bgGreen, bgGreenPale, bgRedDark, bgRedCoral;
-$bgColors: #999, #fff, #bbb, #ddd, #111, #222,
-  #e1f7dc, #ffe3e3, #126300, #609255, #8f0404, #d40c02;
+$backgrounds: bgMT, bgWhite, bgConcrete, bgGreyLight, bgBlack, bgGreyDark, bgPros, bgCons, bgGreen, bgGreenPale, bgRedDark, bgRedCoral;
+$bgColors: #999, #fff, #bbb, #ddd, #111, #222, #e1f7dc, #ffe3e3, #126300, #609255, #8f0404, #d40c02;
 @each $name in $backgrounds {
   $i: index($backgrounds, $name);
   .#{$name} {
@@ -402,13 +400,19 @@ $columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
 
   .dbImageContainer { margin: auto; }
 
+  .modalFilter {
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+
   .modalFilterHeader { font-size: 1rem; }
 
   .modalFilterSubheader,
   .checkboxLabel,
   .dropdown,
   .tag,
-  .tagRemoveButtonn,
+  .tagRemoveButton,
   .controlButton { font-size: 0.8rem; }
 
   .tag {

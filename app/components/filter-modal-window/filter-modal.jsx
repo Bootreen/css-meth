@@ -14,6 +14,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
     colorChecks,
     colorTraitChecks,
     selectAllFilters,
+    setActiveListItem
   } = useStoreActions();
 
   const isModalVisible = useDbStore(state => state.isModalVisible);
@@ -25,19 +26,58 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
   const colors = useDbStore(state => state.colors);
   const colorTraits = useDbStore(state => state.colorTraits);
 
-  const spicinessFilter = event => spicinessChecks(event.target.id.split('_')[1]);
-  const plantSizeFilter = event => plantSizeChecks(event.target.id.split('_')[1]);
-  const fruitSizeFilter = event => fruitSizeChecks(event.target.id.split('_')[1]);
-  const shapesAddFilter = event => shapeChecks(event.target.value);
-  const shapesRemoveFilter = event => shapeChecks(event.currentTarget.getAttribute('customvalue'));
-  const shapeTraitsAddFilter = event => shapeTraitChecks(event.target.value);
-  const shapeTraitsRemoveFilter = event => shapeTraitChecks(event.currentTarget.getAttribute('customvalue'));
-  const colorsAddFilter = event => colorChecks(event.target.value);
-  const colorsRemoveFilter = event => colorChecks(event.currentTarget.getAttribute('customvalue'));
-  const colorTraitsAddFilter = event => colorTraitChecks(event.target.value);
-  const colorTraitsRemoveFilter = event => colorTraitChecks(event.currentTarget.getAttribute('customvalue'));
-  const selectAll = () => selectAllFilters(true);
-  const selectNone = () => selectAllFilters(false);
+  const spicinessFilter = event => {
+    spicinessChecks(event.target.id.split('_')[1]);
+    setActiveListItem(0);
+  };
+  const plantSizeFilter = event => {
+    plantSizeChecks(event.target.id.split('_')[1]);
+    setActiveListItem(0);
+  };
+  const fruitSizeFilter = event => {
+    fruitSizeChecks(event.target.id.split('_')[1]);
+    setActiveListItem(0);
+  };
+  const shapesAddFilter = event => {
+    shapeChecks(event.target.value);
+    setActiveListItem(0);
+  };
+  const shapesRemoveFilter = event => {
+    shapeChecks(event.currentTarget.getAttribute('customvalue'));
+    setActiveListItem(0);
+  };
+  const shapeTraitsAddFilter = event => {
+    shapeTraitChecks(event.target.value);
+    setActiveListItem(0);
+  };
+  const shapeTraitsRemoveFilter = event => {
+    shapeTraitChecks(event.currentTarget.getAttribute('customvalue'));
+    setActiveListItem(0);
+  };
+  const colorsAddFilter = event => {
+    colorChecks(event.target.value);
+    setActiveListItem(0);
+  };
+  const colorsRemoveFilter = event => {
+    colorChecks(event.currentTarget.getAttribute('customvalue'));
+    setActiveListItem(0);
+  };
+  const colorTraitsAddFilter = event => {
+    colorTraitChecks(event.target.value);
+    setActiveListItem(0);
+  };
+  const colorTraitsRemoveFilter = event => {
+    colorTraitChecks(event.currentTarget.getAttribute('customvalue'));
+    setActiveListItem(0);
+  };
+  const selectAll = () => {
+    selectAllFilters(true);
+    setActiveListItem(0);
+  };
+  const selectNone = () => {
+    selectAllFilters(false);
+    setActiveListItem(0);
+  };
 
   return (
     <div className={isModalVisible ? tmpl.modalWndVis : tmpl.modalWnd}>

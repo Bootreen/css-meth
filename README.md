@@ -1,6 +1,6 @@
 A project to demonstrate various CSS methodologies. Created with the Next.js framework with deployment on Vercel.
 
-Current build: [CSS Methidologies](https://css-meth.vercel.app/)
+Current build: [CSS Methodologies](https://css-meth.vercel.app/)
 
 ## Features
 

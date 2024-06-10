@@ -14,12 +14,23 @@ code {
   white-space: pre-wrap;
 }
 
-h1 { font-size: 2rem; }
+h1 {
+  font-size: 2rem;
+}
 
-h2 { font-size: 1.6rem; }
+h2 {
+  font-size: 1.6rem;
+}
 
-h3 { font-size: 1.4rem; }
+h3 {
+  font-size: 1.4rem;
+}
 
-h5 { font-size: 1.1rem; }
+h5 {
+  font-size: 1.1rem;
+}
 
-p, h3 { padding: 0.5rem 1rem; }
+p,
+h3 {
+  padding: 0.5rem 1rem;
+}

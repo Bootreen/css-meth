@@ -1,10 +1,14 @@
-$backgrounds: bgMT, bgWhite, bgConcrete, bgGreyLight, bgBlack, bgGreyDark, bgPros, bgCons, bgGreen, bgGreenPale, bgRedDark, bgRedCoral;
-$bgColors: #999, #fff, #bbb, #ddd, #111, #222, #e1f7dc, #ffe3e3, #126300, #609255, #8f0404, #d40c02;
+$backgrounds: bgMT, bgWhite, bgConcrete, bgGreyLight, bgBlack, bgGreyDark,
+  bgPros, bgCons, bgGreen, bgGreenPale, bgRedDark, bgRedCoral;
+$bgColors: #999, #fff, #bbb, #ddd, #111, #222, #e1f7dc, #ffe3e3, #126300,
+  #609255, #8f0404, #d40c02;
 @each $name in $backgrounds {
   $i: index($backgrounds, $name);
   .#{$name} {
     background-color: nth($bgColors, $i);
-    @if $i == 1 {user-select: none}
+    @if $i == 1 {
+      user-select: none;
+    }
   }
 }
 
@@ -12,7 +16,9 @@ $colorNames: clWhite, clPaper, clGreyLight, clGreyDark, clYellowPale, clRed;
 $colors: #fff, #eee, #ddd, #222, #f7e38f, red;
 @each $name in $colorNames {
   $i: index($colorNames, $name);
-  .#{$name} {color: nth($colors, $i)}
+  .#{$name} {
+    color: nth($colors, $i);
+  }
 }
 
 $hoverStyles: hoverLime, hoverYellowPale, hoverActive, hoverRed, hoverCanary;
@@ -43,22 +49,34 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
   border-top-right-radius: 1rem;
 }
 
-.borderBottomOff { border-bottom: none; }
+.borderBottomOff {
+  border-bottom: none;
+}
 
-.borderDottedYellow { border: 0.125rem dotted #f7e38f; }
+.borderDottedYellow {
+  border: 0.125rem dotted #f7e38f;
+}
 
 .borderInsetRounded {
   border: 0.25rem inset;
   border-radius: 1rem;
 }
 
-.borderOutset { border: 0.25rem outset; }
+.borderOutset {
+  border: 0.25rem outset;
+}
 
-.disabled { display: none; }
+.disabled {
+  display: none;
+}
 
-.centered { text-align: center; }
+.centered {
+  text-align: center;
+}
 
-.textStrong { font-weight: 600; }
+.textStrong {
+  font-weight: 600;
+}
 
 .flexRow {
   display: flex;
@@ -70,11 +88,17 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
   flex-flow: column;
 }
 
-.flexWrap { flex-wrap: wrap; }
+.flexWrap {
+  flex-wrap: wrap;
+}
 
-.flexFill { flex-grow: 1; }
+.flexFill {
+  flex-grow: 1;
+}
 
-.documentTitle { margin: 2rem 0 1rem; }
+.documentTitle {
+  margin: 2rem 0 1rem;
+}
 
 .sectionContainer {
   margin: auto;
@@ -97,18 +121,26 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
   text-transform: uppercase;
 }
 
-.subheader { margin: 1.2rem 0 0 0; }
+.subheader {
+  margin: 1.2rem 0 0 0;
+}
 
 .sectionTitle {
   margin: auto;
   padding: 0.8rem 0;
 }
 
-.paragraph { margin: 0; }
+.paragraph {
+  margin: 0;
+}
 
-.chiliDb { margin: 1rem; }
+.chiliDb {
+  margin: 1rem;
+}
 
-.dbTitle { padding: 1rem 0; }
+.dbTitle {
+  padding: 1rem 0;
+}
 
 .menuTab {
   padding: 0.6rem 0.6rem 0.6rem 1.2rem;
@@ -118,11 +150,15 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
 @for $i from 1 through 6 {
   .menuTab-#{$i} {
     z-index: 31 - $i;
-    @if $i == 1 {padding-left: 0.7rem};
+    @if $i == 1 {
+      padding-left: 0.7rem;
+    }
   }
 }
 
-.menuItemPlaceholder { border-bottom: 0.125rem solid #000; }
+.menuItemPlaceholder {
+  border-bottom: 0.125rem solid #000;
+}
 
 .dbBrowser {
   display: grid;
@@ -175,7 +211,9 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
   margin: 0.5rem 0.5rem 0.5rem 0;
 }
 
-.dbPreviewTitle { grid-area: header; }
+.dbPreviewTitle {
+  grid-area: header;
+}
 
 .dbImageContainer {
   margin-left: 0.5rem;
@@ -185,7 +223,9 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
   position: relative;
 }
 
-.dbImage { border-radius: 1rem; }
+.dbImage {
+  border-radius: 1rem;
+}
 
 .dbPreviewSpecs {
   grid-area: specs;
@@ -193,7 +233,9 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
   margin: 0.5rem 0 0 1.6rem;
 }
 
-.dbPreviewSpecsItem { font-size: 1rem; }
+.dbPreviewSpecsItem {
+  font-size: 1rem;
+}
 
 .dbPreviewDescription {
   grid-area: description;
@@ -209,7 +251,9 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
   transform: translate(-50%, 20%);
 }
 
-.visible { display: block; }
+.visible {
+  display: block;
+}
 
 .modalFilterHeader {
   font-size: 1.4rem;
@@ -230,17 +274,20 @@ $hoverCursors: pointer, pointer, auto, pointer, pointer;
 .columnsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "Spiciness PlantSize FruitSize FruitShape FruitColor";
+  grid-template-areas: "Spiciness PlantSize FruitSize FruitShape FruitColor";
   padding: 1.125rem;
   column-gap: 2rem;
 }
 
-.column { margin-bottom: 0; }
+.column {
+  margin-bottom: 0;
+}
 
 $columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
 @each $name in $columnNames {
-  .column#{$name} {grid-area: $name}
+  .column#{$name} {
+    grid-area: $name;
+  }
 }
 
 .checkbox {
@@ -285,41 +332,66 @@ $columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
 }
 
 @media (max-width: 1280px) {
-  .sectionContainer { width: 95%; }
+  .sectionContainer {
+    width: 95%;
+  }
 
-  body { font-size: 1.1rem; }
+  body {
+    font-size: 1.1rem;
+  }
 
-  code { font-size: 1rem; }
+  code {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .sectionContainer { width: 100%; }
+  .sectionContainer {
+    width: 100%;
+  }
 
-  body { font-size: 0.9rem; }
+  body {
+    font-size: 0.9rem;
+  }
 
   code {
     font-size: 0.8rem;
     padding: 1rem;
   }
 
-  h1 { font-size: 1.3rem;}
+  h1 {
+    font-size: 1.3rem;
+  }
 
-  h2 { font-size: 1.1rem;}
+  h2 {
+    font-size: 1.1rem;
+  }
 
-  h3 { font-size: 1rem;}
+  h3 {
+    font-size: 1rem;
+  }
 
-  h5 { font-size: 0.5rem;}
+  h5 {
+    font-size: 0.5rem;
+  }
 
-  p, h3 { padding: 0.3rem 1rem; }
+  p,
+  h3 {
+    padding: 0.3rem 1rem;
+  }
 
-  .chiliDb { margin: 0.25rem; }
+  .chiliDb {
+    margin: 0.25rem;
+  }
 
   .menuTab {
     padding: 0.25rem 0.25rem 0.25rem 0.9rem;
     margin-right: -0.8rem;
   }
 
-  .menuTab-1 { padding-left: 0.25rem; }
+  .menuTab-1 {
+    padding-left: 0.25rem;
+  }
 
   .dbBrowser {
     grid-template-columns: 1fr;
@@ -329,7 +401,9 @@ $columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
       "browser";
   }
 
-  .dbListContainer { height: auto }
+  .dbListContainer {
+    height: auto;
+  }
 
   .dbPreviewColumn {
     grid-template-columns: 1fr;
@@ -341,7 +415,9 @@ $columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
     margin: 0.6rem;
   }
 
-  .dbImageContainer { margin: auto; }
+  .dbImageContainer {
+    margin: auto;
+  }
 
   .modalFilter {
     top: 3%;
@@ -349,14 +425,18 @@ $columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
     transform: translate(-50%, 0%);
   }
 
-  .modalFilterHeader { font-size: 1rem; }
+  .modalFilterHeader {
+    font-size: 1rem;
+  }
 
   .modalFilterSubheader,
   .checkboxLabel,
   .dropdown,
   .tag,
   .tagRemoveButton,
-  .controlButton { font-size: 0.8rem; }
+  .controlButton {
+    font-size: 0.8rem;
+  }
 
   .tag {
     line-height: 120%;
@@ -372,5 +452,7 @@ $columnNames: Spiciness, PlantSize, FruitSize, FruitShape, FruitColor;
     column-gap: 1rem;
   }
 
-  .column { margin-bottom: 1rem; }
+  .column {
+    margin-bottom: 1rem;
+  }
 }

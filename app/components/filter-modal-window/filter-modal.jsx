@@ -1,10 +1,9 @@
-import { useDbStore, useStoreActions } from '../store/store';
-import { CheckboxGroup } from '../checkbox-group/checkbox-group';
-import { DropDown } from '../dropdown/dropdown';
-import { TagSet } from '../tag-set/tag-set';
+import { useDbStore, useStoreActions } from "../store/store";
+import { CheckboxGroup } from "../checkbox-group/checkbox-group";
+import { DropDown } from "../dropdown/dropdown";
+import { TagSet } from "../tag-set/tag-set";
 
 export const FilterModalWindow = ({ modalHandler, tmpl }) => {
-
   const {
     spicinessChecks,
     plantSizeChecks,
@@ -14,60 +13,60 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
     colorChecks,
     colorTraitChecks,
     selectAllFilters,
-    setActiveListItem
+    setActiveListItem,
   } = useStoreActions();
 
-  const isModalVisible = useDbStore(state => state.isModalVisible);
-  const spiciness = useDbStore(state => state.spiciness);
-  const plantSizes = useDbStore(state => state.plantSizes);
-  const fruitSizes = useDbStore(state => state.fruitSizes);
-  const shapes = useDbStore(state => state.shapes);
-  const shapeTraits = useDbStore(state => state.shapeTraits);
-  const colors = useDbStore(state => state.colors);
-  const colorTraits = useDbStore(state => state.colorTraits);
+  const isModalVisible = useDbStore((state) => state.isModalVisible);
+  const spiciness = useDbStore((state) => state.spiciness);
+  const plantSizes = useDbStore((state) => state.plantSizes);
+  const fruitSizes = useDbStore((state) => state.fruitSizes);
+  const shapes = useDbStore((state) => state.shapes);
+  const shapeTraits = useDbStore((state) => state.shapeTraits);
+  const colors = useDbStore((state) => state.colors);
+  const colorTraits = useDbStore((state) => state.colorTraits);
 
-  const spicinessFilter = event => {
-    spicinessChecks(event.target.id.split('_')[1]);
+  const spicinessFilter = (event) => {
+    spicinessChecks(event.target.id.split("_")[1]);
     setActiveListItem(0);
   };
-  const plantSizeFilter = event => {
-    plantSizeChecks(event.target.id.split('_')[1]);
+  const plantSizeFilter = (event) => {
+    plantSizeChecks(event.target.id.split("_")[1]);
     setActiveListItem(0);
   };
-  const fruitSizeFilter = event => {
-    fruitSizeChecks(event.target.id.split('_')[1]);
+  const fruitSizeFilter = (event) => {
+    fruitSizeChecks(event.target.id.split("_")[1]);
     setActiveListItem(0);
   };
-  const shapesAddFilter = event => {
+  const shapesAddFilter = (event) => {
     shapeChecks(event.target.value);
     setActiveListItem(0);
   };
-  const shapesRemoveFilter = event => {
-    shapeChecks(event.currentTarget.getAttribute('customvalue'));
+  const shapesRemoveFilter = (event) => {
+    shapeChecks(event.currentTarget.getAttribute("customvalue"));
     setActiveListItem(0);
   };
-  const shapeTraitsAddFilter = event => {
+  const shapeTraitsAddFilter = (event) => {
     shapeTraitChecks(event.target.value);
     setActiveListItem(0);
   };
-  const shapeTraitsRemoveFilter = event => {
-    shapeTraitChecks(event.currentTarget.getAttribute('customvalue'));
+  const shapeTraitsRemoveFilter = (event) => {
+    shapeTraitChecks(event.currentTarget.getAttribute("customvalue"));
     setActiveListItem(0);
   };
-  const colorsAddFilter = event => {
+  const colorsAddFilter = (event) => {
     colorChecks(event.target.value);
     setActiveListItem(0);
   };
-  const colorsRemoveFilter = event => {
-    colorChecks(event.currentTarget.getAttribute('customvalue'));
+  const colorsRemoveFilter = (event) => {
+    colorChecks(event.currentTarget.getAttribute("customvalue"));
     setActiveListItem(0);
   };
-  const colorTraitsAddFilter = event => {
+  const colorTraitsAddFilter = (event) => {
     colorTraitChecks(event.target.value);
     setActiveListItem(0);
   };
-  const colorTraitsRemoveFilter = event => {
-    colorTraitChecks(event.currentTarget.getAttribute('customvalue'));
+  const colorTraitsRemoveFilter = (event) => {
+    colorTraitChecks(event.currentTarget.getAttribute("customvalue"));
     setActiveListItem(0);
   };
   const selectAll = () => {
@@ -82,7 +81,10 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
   return (
     <div className={isModalVisible ? tmpl.modalWndVis : tmpl.modalWnd}>
       <h4 className={tmpl.modalHdr}>
-        Filters<span className={tmpl.modalCloseBtn} onClick={modalHandler}>&times;</span>
+        Filters
+        <span className={tmpl.modalCloseBtn} onClick={modalHandler}>
+          &times;
+        </span>
       </h4>
       <div className={tmpl.modalColumnsCont}>
         <div className={tmpl.modalColumn1}>
@@ -129,7 +131,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
             label='shape-tag'
             tmpl={tmpl}
           />
-          <br/>
+          <br />
           <h5 className={tmpl.modalSubHdr}>Shape trait</h5>
           <select
             name='shape-traits'
@@ -164,7 +166,7 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
             label='color-tag'
             tmpl={tmpl}
           />
-          <br/>
+          <br />
           <h5 className={tmpl.modalSubHdr}>Color trait</h5>
           <select
             name='color-traits'
@@ -184,10 +186,16 @@ export const FilterModalWindow = ({ modalHandler, tmpl }) => {
         </div>
       </div>
       <div className={tmpl.modalControlsCont}>
-        <button className={tmpl.modalControlBtn} onClick={selectAll}>Select all</button>
-        <button className={tmpl.modalControlBtn} onClick={selectNone}>Select none</button>
-        <button className={tmpl.modalControlBtn} onClick={modalHandler}>Done</button>
+        <button className={tmpl.modalControlBtn} onClick={selectAll}>
+          Select all
+        </button>
+        <button className={tmpl.modalControlBtn} onClick={selectNone}>
+          Select none
+        </button>
+        <button className={tmpl.modalControlBtn} onClick={modalHandler}>
+          Done
+        </button>
       </div>
     </div>
-  )
+  );
 };

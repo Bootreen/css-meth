@@ -34,9 +34,13 @@
   }
 }
 
-.carousel__button--disabled { display: none; }
+.carousel__button--disabled {
+  display: none;
+}
 
-.section-container__header { margin: 1.2rem 0 0 0; }
+.section-container__header {
+  margin: 1.2rem 0 0 0;
+}
 
 .section-container__header--main {
   margin: auto;
@@ -55,11 +59,17 @@
   color: #ddd;
 }
 
-.section-container__paragraph { margin: 0; }
+.section-container__paragraph {
+  margin: 0;
+}
 
-.section-container__paragraph--pros { background-color: #e1f7dc; }
+.section-container__paragraph--pros {
+  background-color: #e1f7dc;
+}
 
-.section-container__paragraph--cons { background-color: #ffe3e3; }
+.section-container__paragraph--cons {
+  background-color: #ffe3e3;
+}
 
 .chili-db {
   display: flex;
@@ -113,7 +123,9 @@
 @for $i from 1 through 6 {
   .chili-db__menu-item-#{$i} {
     z-index: 31 - $i;
-    @if $i == 1 {padding-left: 0.7rem};
+    @if $i == 1 {
+      padding-left: 0.7rem;
+    }
   }
 }
 
@@ -203,7 +215,9 @@
   position: relative;
 }
 
-.chili-db__preview-img { border-radius: 1rem; }
+.chili-db__preview-img {
+  border-radius: 1rem;
+}
 
 .chili-db__preview-specs {
   grid-area: specs;
@@ -211,9 +225,13 @@
   margin: 0.5rem 0 0 1.6rem;
 }
 
-.chili-db__preview-specs-item { font-size: 1rem; }
+.chili-db__preview-specs-item {
+  font-size: 1rem;
+}
 
-.chili-db__preview-specs-item--strong { font-weight: 600; }
+.chili-db__preview-specs-item--strong {
+  font-weight: 600;
+}
 
 .chili-db__preview-description {
   grid-area: description;
@@ -231,7 +249,9 @@
   border: 0.25rem outset;
 }
 
-.modal-filter--visible { display: block; }
+.modal-filter--visible {
+  display: block;
+}
 
 .modal-filter__header {
   font-size: 1.4rem;
@@ -258,8 +278,7 @@
 .modal-filter__columns-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "spiciness plant-size fruit-size fruit-shape fruit-color";
+  grid-template-areas: "spiciness plant-size fruit-size fruit-shape fruit-color";
   padding: 1.125rem;
   column-gap: 2rem;
 }
@@ -271,7 +290,9 @@
 
 $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
 @each $name in $columnNames {
-  .modal-filter__column--#{$name} {grid-area: $name}
+  .modal-filter__column--#{$name} {
+    grid-area: $name;
+  }
 }
 
 .modal-filter__checkbox-element {
@@ -335,41 +356,66 @@ $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
 }
 
 @media (max-width: 1280px) {
-  .section-container { width: 95%; }
+  .section-container {
+    width: 95%;
+  }
 
-  body { font-size: 1.1rem; }
+  body {
+    font-size: 1.1rem;
+  }
 
-  code { font-size: 1rem; }
+  code {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .section-container { width: 100%; }
+  .section-container {
+    width: 100%;
+  }
 
-  body { font-size: 0.9rem; }
+  body {
+    font-size: 0.9rem;
+  }
 
   code {
     font-size: 0.8rem;
     padding: 1rem;
   }
 
-  h1 { font-size: 1.3rem;}
+  h1 {
+    font-size: 1.3rem;
+  }
 
-  h2 { font-size: 1.1rem;}
+  h2 {
+    font-size: 1.1rem;
+  }
 
-  h3 { font-size: 1rem;}
+  h3 {
+    font-size: 1rem;
+  }
 
-  h5 { font-size: 0.5rem;}
+  h5 {
+    font-size: 0.5rem;
+  }
 
-  p, h3 { padding: 0.3rem 1rem; }
+  p,
+  h3 {
+    padding: 0.3rem 1rem;
+  }
 
-  .chili-db { margin: 0.25rem; }
+  .chili-db {
+    margin: 0.25rem;
+  }
 
   .chili-db__menu-item {
     padding: 0.25rem 0.25rem 0.25rem 0.9rem;
     margin-right: -0.8rem;
   }
 
-  .chili-db__menu-item-1 { padding-left: 0.25rem; }
+  .chili-db__menu-item-1 {
+    padding-left: 0.25rem;
+  }
 
   .chili-db__browser {
     grid-template-columns: 1fr;
@@ -379,7 +425,9 @@ $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
       "browser";
   }
 
-  .chili-db__list-container { height: auto }
+  .chili-db__list-container {
+    height: auto;
+  }
 
   .chili-db__preview-column {
     grid-template-columns: 1fr;
@@ -391,7 +439,9 @@ $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
     margin: 0.6rem;
   }
 
-  .chili-db__preview-img-container { margin: auto; }
+  .chili-db__preview-img-container {
+    margin: auto;
+  }
 
   .modal-filter {
     top: 3%;
@@ -399,14 +449,18 @@ $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
     transform: translate(-50%, 0%);
   }
 
-  .modal-filter__header { font-size: 1rem; }
+  .modal-filter__header {
+    font-size: 1rem;
+  }
 
   .modal-filter__subheader,
   .modal-filter__label,
   .modal-filter__dropdown,
   .modal-filter__tag,
   .modal-filter__tag-remove-button,
-  .modal-filter__control-button { font-size: 0.8rem; }
+  .modal-filter__control-button {
+    font-size: 0.8rem;
+  }
 
   .modal-filter__tag {
     line-height: 120%;
@@ -422,5 +476,7 @@ $columnNames: spiciness, plant-size, fruit-size, fruit-shape, fruit-color;
     column-gap: 1rem;
   }
 
-  .modal-filter__column { margin-bottom: 1rem; }
+  .modal-filter__column {
+    margin-bottom: 1rem;
+  }
 }
